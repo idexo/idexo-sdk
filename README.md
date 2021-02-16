@@ -36,6 +36,14 @@ Methods below are categorized by the blockchain they target.
 #####uploadPlain(plainText)
 #####uploadBuffer(data, encoding)
 
+### Documentation
+
+[idexo docs](https://idexo.gitbook.com/docs)
+
+### Website
+
+[idexo.io](https://idexo.io)
+
 
 
 
