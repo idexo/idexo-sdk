@@ -38,7 +38,7 @@ Methods below are categorized by the blockchain they target.
 
 ### Documentation
 
-[idexo docs](https://idexo.gitbook.com/docs)
+[idexo docs](https://idexo.gitbook.io/docs)
 
 ### Website
 
