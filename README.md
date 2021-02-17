@@ -33,8 +33,11 @@ Methods below are categorized by the blockchain they target.
 
 ### Arweave
 
-#####uploadPlain(plainText)
-#####uploadBuffer(data, encoding)
+uploadPlain(plainText)
+
+uploadBuffer(data, encoding)
+
+uploadHTML(html)
 
 ### Documentation
 

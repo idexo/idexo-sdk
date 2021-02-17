@@ -14,6 +14,13 @@ const IdexoSDK = {
 			let transaction = await axios.post(arweavePostUrl, JSON.stringify({ uploadType: uploadType, data: data, encoding: 'null' }))
 			return transaction
 		},
+		async uploadHTML(data) {
+
+			const uploadType = 'HTML'
+				
+			let transaction = await axios.post(arweavePostUrl, JSON.stringify({ uploadType: uploadType, data: data, encoding: 'null' }))
+			return transaction
+		},
 		async uploadBuffer(data, encoding) { //data must be string (should enforce that with type)
 			const uploadType = 'buffer'
 			
