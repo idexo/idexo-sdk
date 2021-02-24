@@ -28,7 +28,7 @@ const IdexoSDK = {
 			let transaction = await axios.post(arweavePostUrl, JSON.stringify({ uploadType: uploadType, data: data, encoding: encoding }))
 			return transaction
 		}
-	}
+	},
 
 	Ethereum: {
 		async deployERC20(name, symbol) {
