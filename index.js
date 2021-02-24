@@ -1,5 +1,6 @@
 const axios = require('axios')
 const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave'
+const ethereumPostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth'
 
 const IdexoSDK = {
 
@@ -25,6 +26,15 @@ const IdexoSDK = {
 			const uploadType = 'buffer'
 			
 			let transaction = await axios.post(arweavePostUrl, JSON.stringify({ uploadType: uploadType, data: data, encoding: encoding }))
+			return transaction
+		}
+	}
+
+	Ethereum: {
+		async deployERC20(name, symbol) {
+			const tokenType = 'simpleERC20'
+
+			let transaction = await axios.post(ethereumPostUrl, JSON.stringify({ tokenType: tokenType, name: name, symbol: symbol }))
 			return transaction
 		}
 	}
