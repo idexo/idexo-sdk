@@ -39,6 +39,10 @@ uploadBuffer(data, encoding)
 
 uploadHTML(html)
 
+### Ethereum
+
+deployERC20(name, symbol)
+
 ### Documentation
 
 [idexo docs](https://idexo.gitbook.io/docs)
