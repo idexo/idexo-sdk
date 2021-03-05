@@ -46,7 +46,7 @@ const IdexoSDK = {
 				"Content-Type": "application/json",
 				"x-api-key": apiKey
 			}
-			let transaction = await axios.post(multiPostUrl, JSON.stringify({ name: name, symbol: symbol, image: image }), headers)
+			let transaction = await axios.post(multiPostUrl, JSON.stringify({ name: name, symbol: symbol, image: image }), { headers: headers })
 			return transaction
 		}
 	}
