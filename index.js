@@ -1,6 +1,7 @@
 const axios = require('axios')
 const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave'
 const ethereumPostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth'
+const multiPostUrl = 'https://4a2pyktb01.execute-api.us-east-1.amazonaws.com/multiclass'
 
 const IdexoSDK = {
 
@@ -35,6 +36,17 @@ const IdexoSDK = {
 			const tokenType = 'simpleERC20'
 
 			let transaction = await axios.post(ethereumPostUrl, JSON.stringify({ tokenType: tokenType, name: name, symbol: symbol }))
+			return transaction
+		}
+	},
+
+	Multi: {
+		async deployERC721ArEth(name, symbol, image, apiKey) {
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+			let transaction = await axios.post(multiPostUrl, JSON.stringify({ name: name, symbol: symbol, image: image }), headers)
 			return transaction
 		}
 	}
