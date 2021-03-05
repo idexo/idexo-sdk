@@ -1,7 +1,10 @@
 const axios = require('axios')
+const fs = require('fs')
+
 const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave'
 const ethereumPostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth'
 const multiPostUrl = 'https://4a2pyktb01.execute-api.us-east-1.amazonaws.com/multiclass'
+
 
 const IdexoSDK = {
 
@@ -46,7 +49,8 @@ const IdexoSDK = {
 				"Content-Type": "application/json",
 				"x-api-key": apiKey
 			}
-			let transaction = await axios.post(multiPostUrl, JSON.stringify({ name: name, symbol: symbol, image: image }), { headers: headers })
+			const image64 = fs.readFileSync(image, 'base64')
+			let transaction = await axios.post(multiPostUrl, JSON.stringify({ name: name, symbol: symbol, image: image64 }), { headers: headers })
 			return transaction
 		}
 	}
