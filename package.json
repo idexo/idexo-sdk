@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ZIPWeb3/idexo-sdk#readme",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "mime": "^2.5.2"
   }
 }

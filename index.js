@@ -1,5 +1,6 @@
 const axios = require('axios')
 const fs = require('fs')
+const mime = require('mime')
 
 const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave'
 const ethereumPostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth'
@@ -31,6 +32,14 @@ const IdexoSDK = {
 			
 			let transaction = await axios.post(arweavePostUrl, JSON.stringify({ uploadType: uploadType, data: data, encoding: encoding }))
 			return transaction
+		},
+		async uploadImage(imagepath) { //data must be string (should enforce that with type)
+			const uploadType = 'image'
+			const contentType = mime.getType(imagepath)
+			const image = await fs.readFile(imagepath, { encoding: 'base64' })
+			
+			let transaction = await axios.post(arweavePostUrl, JSON.stringify({ uploadType: uploadType, image: image, contentType: contentType }))
+			return transaction
 		}
 	},
 
@@ -44,13 +53,14 @@ const IdexoSDK = {
 	},
 
 	Multi: {
-		async deployERC721ArEth(name, symbol, image, apiKey) {
+		async deployERC721ArEth(name, symbol, imagepath, apiKey) {
 			const headers = {
 				"Content-Type": "application/json",
 				"x-api-key": apiKey
 			}
-			const image64 = fs.readFileSync(image, 'base64')
-			let transaction = await axios.post(multiPostUrl, JSON.stringify({ name: name, symbol: symbol, image: image64 }), { headers: headers })
+			const contentType = mime.getType(imagepath)
+			const image = await fs.readFile(imagepath, { encoding: 'base64' })
+			let transaction = await axios.post(multiPostUrl, JSON.stringify({ name: name, symbol: symbol, image: image, contentType: contentType }), { headers: headers })
 			return transaction
 		}
 	}
