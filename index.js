@@ -1,5 +1,5 @@
 const axios = require('axios')
-const fs = require('fs')
+const fs = require('fs').promises;
 const mime = require('mime')
 
 const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave'
