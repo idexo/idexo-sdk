@@ -5,6 +5,7 @@ const mime = require('mime')
 const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave'
 const ethereumPostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth'
 const multiPostUrl = 'https://4a2pyktb01.execute-api.us-east-1.amazonaws.com/multiclass'
+const bscPostUrl = 'https://aiuh3j0713.execute-api.us-east-1.amazonaws.com/idexobsc'
 
 
 const IdexoSDK = {
@@ -39,6 +40,22 @@ const IdexoSDK = {
 			const image = await fs.readFile(imagepath, { encoding: 'base64' })
 			
 			let transaction = await axios.post(arweavePostUrl, JSON.stringify({ uploadType: uploadType, image: image, contentType: contentType }))
+			return transaction
+		}
+	},
+
+	Binance: {
+
+		async deployBEP20(name, symbol, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'createBEP20'
+				
+			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }), { headers: headers })
 			return transaction
 		}
 	},
