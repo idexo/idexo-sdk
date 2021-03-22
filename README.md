@@ -39,6 +39,14 @@ uploadBuffer(data, encoding)
 
 uploadHTML(html)
 
+### Binance Smart Chain
+
+deployBEP20(name, symbol, apiKey)
+
+deployBEP721(name, symbol, apiKey)
+
+mintBEP721(contractAddress, mintToAddress, tokenUri, apiKey)
+
 ### Ethereum
 
 deployERC20(name, symbol)

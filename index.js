@@ -57,6 +57,30 @@ const IdexoSDK = {
 				
 			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }), { headers: headers })
 			return transaction
+		}, 
+		async deployBEP721(name, symbol, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'createBEP721'
+				
+			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }), { headers: headers })
+			return transaction
+		}, 
+		async mintBEP721(contractAddress, mintToAddress, tokenUri, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'mintBEP721'
+				
+			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, contractAddress: contractAddress, mintToAddress: mintToAddress, tokenUri: tokenUri }), { headers: headers })
+			return transaction
 		}
 	},
 
