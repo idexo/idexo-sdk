@@ -4,8 +4,8 @@ const mime = require('mime')
 
 const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave'
 const ethereumPostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth'
-const multiPostUrl = 'https://4a2pyktb01.execute-api.us-east-1.amazonaws.com/multiclass'
-const bscPostUrl = 'https://aiuh3j0713.execute-api.us-east-1.amazonaws.com/idexobsc'
+const multiPostUrl = 'https://multiclass.idexo.io'
+const bscPostUrl = 'https://idexobsc.idexo.io'
 
 
 const IdexoSDK = {
