@@ -137,7 +137,7 @@ const IdexoSDK = {
 			const contentType = mime.getType(imagepath)
 			const image = await fs.readFile(imagepath, { encoding: 'base64' })
 			const transactionType = 'mintBscAr'
-			let transaction = await axios.post(bscPostUrlOne, JSON.stringify({ contractAddress: contractAddress, addressToMintTo: addressToMintTo, image: image, contentType: contentType, nftName: nftName, nftDescription: nftDescription, attributes: attributes }), { headers: headers })
+			let transaction = await axios.post(bscPostUrlOne, JSON.stringify({ contractAddress: contractAddress, addressToMintTo: addressToMintTo, image: image, contentType: contentType, nftName: nftName, nftDescription: nftDescription, attributes: attributes, transactionType: transactionType }), { headers: headers })
 			return transaction
 		}
 	}
