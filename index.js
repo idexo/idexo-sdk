@@ -6,6 +6,7 @@ const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/d
 const ethereumPostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth'
 const multiPostUrl = 'https://multiclass.idexo.io'
 const bscPostUrl = 'https://idexobsc.idexo.io'
+const bscPostUrlOne = 'https://mainnetbsc.idexo.io'
 
 
 const IdexoSDK = {
@@ -53,12 +54,36 @@ const IdexoSDK = {
 				"x-api-key": apiKey
 			}
 
+			const transactionType = 'deployBEP20Standard'
+				
+			let transaction = await axios.post(bscPostUrlOne, JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }), { headers: headers })
+			return transaction
+		}, 
+		async deployBEP20Test(name, symbol, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
 			const transactionType = 'createBEP20'
 				
 			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }), { headers: headers })
 			return transaction
-		}, 
+		},
 		async deployBEP721(name, symbol, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'deployBEP721'
+				
+			let transaction = await axios.post(bscPostUrlOne, JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }), { headers: headers })
+			return transaction
+		}, 
+		async deployBEP721Test(name, symbol, apiKey) {
 
 			const headers = {
 				"Content-Type": "application/json",
@@ -102,6 +127,17 @@ const IdexoSDK = {
 			const contentType = mime.getType(imagepath)
 			const image = await fs.readFile(imagepath, { encoding: 'base64' })
 			let transaction = await axios.post(multiPostUrl, JSON.stringify({ name: name, symbol: symbol, image: image, contentType: contentType }), { headers: headers })
+			return transaction
+		},
+		async mintBscAr(contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes) {
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+			const contentType = mime.getType(imagepath)
+			const image = await fs.readFile(imagepath, { encoding: 'base64' })
+			const transactionType = 'mintBscAr'
+			let transaction = await axios.post(bscPostUrlOne, JSON.stringify({ contractAddress: contractAddress, addressToMintTo: addressToMintTo, image: image, contentType: contentType, nftName: nftName, nftDescription: nftDescription, attributes: attributes }), { headers: headers })
 			return transaction
 		}
 	}
