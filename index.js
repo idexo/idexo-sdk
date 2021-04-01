@@ -106,6 +106,18 @@ const IdexoSDK = {
 				
 			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, contractAddress: contractAddress, mintToAddress: mintToAddress, tokenUri: tokenUri }), { headers: headers })
 			return transaction
+		},
+		async mintBEP20(contractAddress, mintToAddress, tokenUri, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'mintBEP20Standard'
+				
+			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, contractAddress: contractAddress, mintToAddress: mintToAddress, tokenUri: tokenUri }), { headers: headers })
+			return transaction
 		}
 	},
 
