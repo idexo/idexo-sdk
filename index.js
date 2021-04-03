@@ -71,6 +71,18 @@ const IdexoSDK = {
 			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }), { headers: headers })
 			return transaction
 		},
+		async deployBEP20CappedTest(cap, name, symbol, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'createBEP20WithCap'
+				
+			let transaction = await axios.post(bscPostUrl, JSON.stringify({ transactionType: transactionType, cap: cap, name: name, symbol: symbol }), { headers: headers })
+			return transaction
+		},
 		async deployBEP721(name, symbol, apiKey) {
 
 			const headers = {
