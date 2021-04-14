@@ -4,6 +4,7 @@ const mime = require('mime')
 
 const arweavePostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave'
 const ethereumPostUrl = 'https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth'
+const ethPostUrlOne = 'https://mainneteth.idexo.io'
 const multiPostUrl = 'https://multiclass.idexo.io'
 const bscPostUrl = 'https://idexobsc.idexo.io'
 const bscPostUrlOne = 'https://mainnetbsc.idexo.io'
@@ -150,6 +151,30 @@ const IdexoSDK = {
 			const tokenType = 'simpleERC20'
 
 			let transaction = await axios.post(ethereumPostUrl, JSON.stringify({ tokenType: tokenType, name: name, symbol: symbol }))
+			return transaction
+		},
+		async deployERC20Capped(cap, name, symbol, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'deployCappedERC20'
+				
+			let transaction = await axios.post(ethPostUrlOne, JSON.stringify({ transactionType: transactionType, cap: cap, name: name, symbol: symbol }), { headers: headers })
+			return transaction
+		},
+		async mintERC20(contractAddress, mintToAddress, amount, apiKey) {
+
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'mintERC20Standard'
+				
+			let transaction = await axios.post(ethPostUrlOne, JSON.stringify({ transactionType: transactionType, contractAddress: contractAddress, mintToAddress: mintToAddress, amount: amount }), { headers: headers })
 			return transaction
 		}
 	},
