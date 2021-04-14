@@ -1,6 +1,6 @@
 {
   "name": "idexo-sdk",
-  "version": "5.0.6",
+  "version": "6.0.0",
   "description": "The idexo sdk",
   "main": "index.js",
   "scripts": {
