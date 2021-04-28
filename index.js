@@ -8,6 +8,7 @@ const ethPostUrlOne = 'https://mainneteth.idexo.io'
 const multiPostUrl = 'https://multiclass.idexo.io'
 const bscPostUrl = 'https://idexobsc.idexo.io'
 const bscPostUrlOne = 'https://mainnetbsc.idexo.io'
+const polygonPostUrl = 'https://polygon.idexo.io'
 
 
 const IdexoSDK = {
@@ -201,6 +202,19 @@ const IdexoSDK = {
 			let transaction = await axios.post(bscPostUrlOne, JSON.stringify({ contractAddress: contractAddress, addressToMintTo: addressToMintTo, image: image, contentType: contentType, nftName: nftName, nftDescription: nftDescription, attributes: attributes, transactionType: transactionType }), { headers: headers })
 			return transaction
 		}
+	},
+
+	Polygon: {
+		async deployCappedPOL721(name, symbol, cap, apiKey) {
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+			
+			let transaction = await axios.post(polygonPostUrl, JSON.stringify({ name: name, symbol: symbol, cap: cap }), { headers: headers })
+			return transaction
+		}
+		
 	}
 		
 		
