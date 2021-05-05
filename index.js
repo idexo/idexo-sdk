@@ -224,8 +224,10 @@ const IdexoSDK = {
 				"Content-Type": "application/json",
 				"x-api-key": apiKey
 			}
+
+			const transactionType = 'createBEP721'
 			
-			let transaction = await axios.post(reactPostUrl, JSON.stringify({ name: name, symbol: symbol }), { headers: headers })
+			let transaction = await axios.post(reactPostUrl, JSON.stringify({ name: name, symbol: symbol, transactionType: transactionType }), { headers: headers })
 			return transaction
 		}
 		
