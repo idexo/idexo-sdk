@@ -9,6 +9,7 @@ const multiPostUrl = 'https://multiclass.idexo.io'
 const bscPostUrl = 'https://idexobsc.idexo.io'
 const bscPostUrlOne = 'https://mainnetbsc.idexo.io'
 const polygonPostUrl = 'https://polygon.idexo.io'
+const reactPostUrl = 'https://react.idexo.io'
 
 
 const IdexoSDK = {
@@ -215,7 +216,21 @@ const IdexoSDK = {
 			return transaction
 		}
 		
+	},
+
+	React: {
+		async createBEP721(name, symbol, apiKey) {
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+			
+			let transaction = await axios.post(reactPostUrl, JSON.stringify({ name: name, symbol: symbol }), { headers: headers })
+			return transaction
+		}
+		
 	}
+	
 		
 		
 }
