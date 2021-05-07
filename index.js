@@ -240,6 +240,17 @@ const IdexoSDK = {
 			
 			let transaction = await axios.post(reactPostUrl, JSON.stringify({ name: name, symbol: symbol, transactionType: transactionType }), { headers: headers })
 			return transaction
+		},
+		async mintBEP721(contractAddress, addressToMintTo, image, contentType, nftName, nftDescription, attributes, apiKey) {
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+
+			const transactionType = 'mintBscAr'
+			
+			let transaction = await axios.post(reactPostUrl, JSON.stringify({ contractAddress: contractAddress, addressToMintTo: addressToMintTo, image: image, contentType: contentType, nftName: nftName, nftDescription: nftDescription, attributes: attributes, transactionType: transactionType }), { headers: headers })
+			return transaction
 		}
 		
 	}
