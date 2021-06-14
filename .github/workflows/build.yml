@@ -1,0 +1,37 @@
+name: "Build"
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                shell: bash
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
+
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: us-east-1
+
+            - name: Versions
+              run: npm version; aws --version
+
+            - name: npm build
+              run: |
+                  npm install --quiet --no-progress
+                  node index.js
+                  ls -lah
