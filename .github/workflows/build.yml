@@ -1,0 +1,30 @@
+name: "Build"
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                shell: bash
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
+
+            - name: Versions
+              run: npm version; aws --version
+
+            - name: npm build
+              run: |
+                  npm install --quiet --no-progress
+                  node index.js
+                  ls -lah
