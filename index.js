@@ -11,6 +11,15 @@ const bscPostUrlOne = "https://mainnetbsc.idexo.io"
 const polygonPostUrl = "https://polygon.idexo.io"
 const reactPostUrl = "https://react.idexo.io"
 
+function headers(apiKey) {
+    return {
+        headers: {
+            "Content-Type": "application/json",
+            "x-api-key": apiKey
+        }
+    }
+}
+
 const IdexoSDK = {
     Arweave: {
         async uploadPlain(data) {
@@ -57,101 +66,66 @@ const IdexoSDK = {
 
     Binance: {
         async deployBEP20(name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "deployBEP20Standard"
 
             let transaction = await axios.post(
                 bscPostUrlOne,
                 JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async deployBEP20Test(name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "createBEP20"
 
             let transaction = await axios.post(
                 bscPostUrl,
                 JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async deployBEP20CappedTest(cap, name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "createBEP20WithCap"
 
             let transaction = await axios.post(
                 bscPostUrl,
                 JSON.stringify({ transactionType: transactionType, cap: cap, name: name, symbol: symbol }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async deployBEP20Capped(cap, name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "createBEP20WCapMain"
 
             let transaction = await axios.post(
                 bscPostUrlOne,
                 JSON.stringify({ transactionType: transactionType, cap: cap, name: name, symbol: symbol }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async deployBEP721(name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "deployBEP721"
 
             let transaction = await axios.post(
                 bscPostUrlOne,
                 JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async deployBEP721Test(name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "createBEP721"
 
             let transaction = await axios.post(
                 bscPostUrl,
                 JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async mintBEP721(contractAddress, mintToAddress, tokenUri, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "mintBEP721"
 
             let transaction = await axios.post(
@@ -162,16 +136,11 @@ const IdexoSDK = {
                     mintToAddress: mintToAddress,
                     tokenUri: tokenUri
                 }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async mintBEP20(contractAddress, mintToAddress, amount, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "mintBEP20Standard"
 
             let transaction = await axios.post(
@@ -182,7 +151,7 @@ const IdexoSDK = {
                     mintToAddress: mintToAddress,
                     amount: amount
                 }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         }
@@ -199,26 +168,16 @@ const IdexoSDK = {
             return transaction
         },
         async deployERC20Capped(cap, name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "deployCappedERC20"
 
             let transaction = await axios.post(
                 ethPostUrlOne,
                 JSON.stringify({ transactionType: transactionType, cap: cap, name: name, symbol: symbol }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async mintERC20(contractAddress, mintToAddress, amount, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "mintERC20Standard"
 
             let transaction = await axios.post(
@@ -229,7 +188,7 @@ const IdexoSDK = {
                     mintToAddress: mintToAddress,
                     amount: amount
                 }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         }
@@ -237,24 +196,16 @@ const IdexoSDK = {
 
     Multi: {
         async deployERC721ArEth(name, symbol, imagepath, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
             const contentType = mime.getType(imagepath)
             const image = await fs.readFile(imagepath, { encoding: "base64" })
             let transaction = await axios.post(
                 multiPostUrl,
                 JSON.stringify({ name: name, symbol: symbol, image: image, contentType: contentType }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async mintBscAr(contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
             const contentType = mime.getType(imagepath)
             const image = await fs.readFile(imagepath, { encoding: "base64" })
             const transactionType = "mintBscAr"
@@ -270,7 +221,7 @@ const IdexoSDK = {
                     attributes: attributes,
                     transactionType: transactionType
                 }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         }
@@ -278,15 +229,10 @@ const IdexoSDK = {
 
     Polygon: {
         async deployCappedPOL721(name, symbol, cap, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             let transaction = await axios.post(
                 polygonPostUrl,
                 JSON.stringify({ name: name, symbol: symbol, cap: cap }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         }
@@ -294,32 +240,22 @@ const IdexoSDK = {
 
     React: {
         async createBEP721(name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "createBEP721"
 
             let transaction = await axios.post(
                 reactPostUrl,
                 JSON.stringify({ name: name, symbol: symbol, transactionType: transactionType }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
         async createBEP721Test(name, symbol, apiKey) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "createBEP721Test"
 
             let transaction = await axios.post(
                 reactPostUrl,
                 JSON.stringify({ name: name, symbol: symbol, transactionType: transactionType }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         },
@@ -333,11 +269,6 @@ const IdexoSDK = {
             attributes,
             apiKey
         ) {
-            const headers = {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey
-            }
-
             const transactionType = "mintBscAr"
 
             let transaction = await axios.post(
@@ -352,7 +283,7 @@ const IdexoSDK = {
                     attributes: attributes,
                     transactionType: transactionType
                 }),
-                { headers: headers }
+                headers(apiKey)
             )
             return transaction
         }
