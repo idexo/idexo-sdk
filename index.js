@@ -211,8 +211,17 @@ const IdexoSDK = {
 				"Content-Type": "application/json",
 				"x-api-key": apiKey
 			}
-			
-			let transaction = await axios.post(polygonPostUrl, JSON.stringify({ name: name, symbol: symbol, cap: cap }), { headers: headers })
+			const transactionType = 'deployCappedP721'
+			let transaction = await axios.post(polygonPostUrl, JSON.stringify({ name: name, symbol: symbol, cap: cap, transactionType: transactionType }), { headers: headers })
+			return transaction
+		},
+		async deployCappedPOL20(name, symbol, cap, apiKey) {
+			const headers = {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey
+			}
+			const transactionType = 'deployCappedP20'
+			let transaction = await axios.post(polygonPostUrl, JSON.stringify({ name: name, symbol: symbol, cap: cap, transactionType: transactionType }), { headers: headers })
 			return transaction
 		}
 		
