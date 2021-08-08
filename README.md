@@ -39,6 +39,8 @@ uploadBuffer(data, encoding)
 
 uploadHTML(html)
 
+uploadImage(imagepath)
+
 ### Binance Smart Chain
 
 deployBEP20(name, symbol, apiKey)
