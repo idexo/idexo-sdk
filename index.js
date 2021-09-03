@@ -291,7 +291,7 @@ const IdexoSDK = {
     },
 
     Avalanche: {
-        async deployCappedNFT(name, symbol, cap) {
+        async deployCappedNFT(name, symbol, cap, apiKey) {
             const transactionType = "deployCappedNFT"
 
             let transaction = await axios.post(
@@ -306,7 +306,7 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async mintCappedNFT(contractAddress, addressToMintTo, tokenUri) {
+        async mintCappedNFT(contractAddress, addressToMintTo, tokenUri, apiKey) {
             const transactionType = "mintCappedNFT"
 
             let transaction = await axios.post(
