@@ -10,6 +10,7 @@ const bscPostUrl = "https://idexobsc.idexo.io"
 const bscPostUrlOne = "https://mainnetbsc.idexo.io"
 const polygonPostUrl = "https://polygon.idexo.io"
 const reactPostUrl = "https://react.idexo.io"
+const avalanchePostUrl = "https://avalanche.idexo.io"
 
 function headers(apiKey) {
     return {
@@ -21,9 +22,6 @@ function headers(apiKey) {
 }
 
 const IdexoSDK = {
-
-	
-
     Arweave: {
         async uploadPlain(data) {
             const uploadType = "plainText"
@@ -290,8 +288,40 @@ const IdexoSDK = {
             )
             return transaction
         }
-    }
+    },
 
+    Avalanche: {
+        async deployCappedNFT(name, symbol, cap) {
+            const transactionType = "deployCappedNFT"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    name: name,
+                    symbol: symbol,
+                    cap: cap,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async mintCappedNFT(contractAddress, addressToMintTo, tokenUri) {
+            const transactionType = "mintCappedNFT"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    addressToMintTo: addressToMintTo,
+                    tokenUri: tokenUri,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        }
+    }
 }
 
 module.exports = IdexoSDK
