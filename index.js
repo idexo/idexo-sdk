@@ -321,14 +321,52 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async mintBatchNTF() {},
-        async getTokenUri(tokenId, apiKey) {
-            const transactionType = "getTokenUri"
+        async mintBatchNFT(contractAddress, recipients, tokenURIs, apiKey) {
+            const transactionType = "mintBatchNFT"
 
-            let transaction = await axios.post(avalanchePostUrl, JSON.stringify({}), headers(apiKey))
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    recipients: recipients,
+                    tokenURIs: tokenURIs,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
             return transaction
         },
-        async setTokenUri(tokenId, apiKey) {}
+
+        async setTokenURI(contractAddress, tokenId, tokenUri, apiKey) {
+            const transactionType = "setTokenURI"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    tokenId: tokenId,
+                    tokenUri: tokenUri,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+
+        async getTokenURI(contractAddress, tokenId, apiKey) {
+            const transactionType = "getTokenURI"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    tokenId: tokenId,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        }
     }
 }
 
