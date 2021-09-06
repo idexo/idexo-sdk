@@ -320,7 +320,15 @@ const IdexoSDK = {
                 headers(apiKey)
             )
             return transaction
-        }
+        },
+        async mintBatchNTF() {},
+        async getTokenUri(tokenId, apiKey) {
+            const transactionType = "getTokenUri"
+
+            let transaction = await axios.post(avalanchePostUrl, JSON.stringify({}), headers(apiKey))
+            return transaction
+        },
+        async setTokenUri(tokenId, apiKey) {}
     }
 }
 
