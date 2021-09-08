@@ -291,6 +291,82 @@ const IdexoSDK = {
     },
 
     Avalanche: {
+        async deploySimpleNFT(name, symbol, apiKey) {
+            const transactionType = "deploySimpleNFT"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    name: name,
+                    symbol: symbol,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async mintSimpleNFT(contractAddress, addressToMintTo, tokenUri, apiKey) {
+            const transactionType = "mintSimpleNFT"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    addressToMintTo: addressToMintTo,
+                    tokenUri: tokenUri,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async mintSimpleBatchNFT(contractAddress, recipients, tokenURIs, apiKey) {
+            const transactionType = "mintSimpleBatchNFT"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    recipients: recipients,
+                    tokenURIs: tokenURIs,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+
+        async setSimpleTokenURI(contractAddress, tokenId, tokenUri, apiKey) {
+            const transactionType = "setSimpleTokenURI"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    tokenId: tokenId,
+                    tokenUri: tokenUri,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+
+        async getSimpleTokenURI(contractAddress, tokenId, apiKey) {
+            const transactionType = "getSimpleTokenURI"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    tokenId: tokenId,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+
         async deployCappedNFT(name, symbol, cap, apiKey) {
             const transactionType = "deployCappedNFT"
 
@@ -321,8 +397,8 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async mintBatchNFT(contractAddress, recipients, tokenURIs, apiKey) {
-            const transactionType = "mintBatchNFT"
+        async mintCappedBatchNFT(contractAddress, recipients, tokenURIs, apiKey) {
+            const transactionType = "mintCappedBatchNFT"
 
             let transaction = await axios.post(
                 avalanchePostUrl,
@@ -337,8 +413,8 @@ const IdexoSDK = {
             return transaction
         },
 
-        async setTokenURI(contractAddress, tokenId, tokenUri, apiKey) {
-            const transactionType = "setTokenURI"
+        async setCappedTokenURI(contractAddress, tokenId, tokenUri, apiKey) {
+            const transactionType = "setCappedTokenURI"
 
             let transaction = await axios.post(
                 avalanchePostUrl,
@@ -353,8 +429,8 @@ const IdexoSDK = {
             return transaction
         },
 
-        async getTokenURI(contractAddress, tokenId, apiKey) {
-            const transactionType = "getTokenURI"
+        async getCappedTokenURI(contractAddress, tokenId, apiKey) {
+            const transactionType = "getCappedTokenURI"
 
             let transaction = await axios.post(
                 avalanchePostUrl,
