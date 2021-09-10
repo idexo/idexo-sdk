@@ -80,6 +80,20 @@ mintBEP721(contractAddress, mintToAddress, tokenUri, apiKey)
 
 deployERC20(name, symbol)
 
+### Polygon
+
+#### CappedNFT
+
+deployCappedNFT(name, symbol, cap, apiKey)
+
+mintCappedNFT(contractAddress, addressToMintTo, tokenUri, apiKey)
+
+mintCappedBatchNFT(contractAddress, [recipients], [tokenURIs], apiKey)
+
+setCappedTokenURI(contractAddress, tokenId, tokenUri, apiKey)
+
+getCappedTokenURI(contractAddress, tokenId, apiKey)
+
 ### Documentation
 
 [idexo docs](https://idexo.gitbook.io/docs)

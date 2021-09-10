@@ -196,6 +196,26 @@ const IdexoSDK = {
     },
 
     Multi: {
+        async mintAvaxAr(contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes) {
+            const contentType = mime.getType(imagepath)
+            const image = await fs.readFile(imagepath, { encoding: "base64" })
+            const transactionType = "mintAvaxAr"
+            let transaction = await axios.post(
+                bscPostUrlOne,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    addressToMintTo: addressToMintTo,
+                    image: image,
+                    contentType: contentType,
+                    nftName: nftName,
+                    nftDescription: nftDescription,
+                    attributes: attributes,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
         async deployERC721ArEth(name, symbol, imagepath, apiKey) {
             const contentType = mime.getType(imagepath)
             const image = await fs.readFile(imagepath, { encoding: "base64" })
@@ -229,10 +249,78 @@ const IdexoSDK = {
     },
 
     Polygon: {
-        async deployCappedPOL721(name, symbol, cap, apiKey) {
+        async deployCappedNFT(name, symbol, cap, apiKey) {
+            const transactionType = "deployCappedNFT"
+
             let transaction = await axios.post(
-                polygonPostUrl,
-                JSON.stringify({ name: name, symbol: symbol, cap: cap }),
+                avalanchePostUrl,
+                JSON.stringify({
+                    name: name,
+                    symbol: symbol,
+                    cap: cap,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async mintCappedNFT(contractAddress, addressToMintTo, tokenUri, apiKey) {
+            const transactionType = "mintCappedNFT"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    addressToMintTo: addressToMintTo,
+                    tokenUri: tokenUri,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async mintCappedBatchNFT(contractAddress, recipients, tokenURIs, apiKey) {
+            const transactionType = "mintCappedBatchNFT"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    recipients: recipients,
+                    tokenURIs: tokenURIs,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+
+        async setCappedTokenURI(contractAddress, tokenId, tokenUri, apiKey) {
+            const transactionType = "setCappedTokenURI"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    tokenId: tokenId,
+                    tokenUri: tokenUri,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+
+        async getCappedTokenURI(contractAddress, tokenId, apiKey) {
+            const transactionType = "getCappedTokenURI"
+
+            let transaction = await axios.post(
+                avalanchePostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    tokenId: tokenId,
+                    transactionType: transactionType
+                }),
                 headers(apiKey)
             )
             return transaction
