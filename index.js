@@ -11,6 +11,7 @@ const bscPostUrlOne = "https://mainnetbsc.idexo.io"
 const polygonPostUrl = "https://polygon.idexo.io"
 const reactPostUrl = "https://react.idexo.io"
 const avalanchePostUrl = "https://avalanche.idexo.io"
+const fantomUrl = "https://fantom.idexo.io"
 
 function headers(apiKey) {
     return {
@@ -189,6 +190,28 @@ const IdexoSDK = {
                     mintToAddress: mintToAddress,
                     amount: amount
                 }),
+                headers(apiKey)
+            )
+            return transaction
+        }
+    },
+    Fantom: {
+        async deployNFTCollection(name, symbol, apiKey) {
+            const tokenType = "standardNFTCollection"
+
+            let transaction = await axios.post(
+                fantomUrl,
+                JSON.stringify({ tokenType: tokenType, name: name, symbol: symbol }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async mintNFT(contractAddress, name, description, tokenuri, apiKey) {
+            const transactionType = "standardNFTMint"
+
+            let transaction = await axios.post(
+                fantomUrl,
+                JSON.stringify({ transactionType: transactionType, name: name, description: description, tokenUri: tokenuri }),
                 headers(apiKey)
             )
             return transaction
