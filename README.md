@@ -11,7 +11,7 @@ const ido = require("idexo-sdk")
 
 const plainText = "Hello World"
 
-ido.Arweave.uploadPlain(plainText).then(console.log)
+ido.Storage.uploadPlain('arweave', plainText).then(res => console.log(res.data))
 ```
 
 ## Installing
@@ -30,74 +30,60 @@ $ yarn add idexo-sdk
 
 ## Available Methods
 
-Methods below are categorized by the blockchain they target.
+Methods below are categorized by the general use case.
 
-### Arweave
+### Marketplace
 
-uploadPlain(plainText)
+deployMarketplace(network, tradingFee, marketType, apiKey)
 
-uploadBuffer(data, encoding)
+addNFTContract(network, contractAddress, nftcontract, apiKey)
 
-uploadHTML(html)
 
-uploadImage(imagepath)
+### NFT
 
-### Avalanche
+createCollection(network, name, symbol, capped, apiKey, cap)
 
-#### SimpleNFT
+mintNFT(network, contractAddress, addressToMintTo, tokenUri, apiKey)
 
-deploySimpleNFT(name, symbol, apiKey)
+mintNFTBatch(network, contractAddress, [recipients], [tokenURIs], apiKey)
 
-mintSimpleNFT(contractAddress, addressToMintTo, tokenUri, apiKey)
+setTokenURI(network, contractAddress, tokenId, tokenUri, apiKey)
 
-mintSimpleBatchNFT(contractAddress, [recipients], [tokenURIs], apiKey)
+getTokenURI(network, contractAddress, tokenId, apiKey)
 
-setSimpleTokenURI(contractAddress, tokenId, tokenUri, apiKey)
 
-getSimpleTokenURI(contractAddress, tokenId, apiKey)
+### Multi
 
-#### CappedNFT
+mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes)
 
-deployCappedNFT(name, symbol, cap, apiKey)
 
-mintCappedNFT(contractAddress, addressToMintTo, tokenUri, apiKey)
+### Project Tokens
 
-mintCappedBatchNFT(contractAddress, [recipients], [tokenURIs], apiKey)
+deployToken(network, name, symbol, capped, apiKey, cap)
+mintToken(network, contractAddress, mintToAddress, amount, apiKey)
 
-setCappedTokenURI(contractAddress, tokenId, tokenUri, apiKey)
+### Storage
 
-getCappedTokenURI(contractAddress, tokenId, apiKey)
+uploadPlain(network, data)
+uploadHTML(network, data)
+uploadBuffer(network, data, encoding)
+uploadImage(network, imagepath)
 
-### Binance Smart Chain
+### Staking
 
-deployBEP20(name, symbol, apiKey)
+deployPool(network, name, symbol, baseUri, multi, depositTokens, rewardTokens, apiKey)
 
-deployBEP721(name, symbol, apiKey)
+### Vesting
 
-mintBEP721(contractAddress, mintToAddress, tokenUri, apiKey)
+deployVesting(network, depositToken, beneficiary, startTime, cliffMonth, durationMonth, apiKey)
 
-### Ethereum
 
-deployERC20(name, symbol)
 
-### Polygon
-
-#### CappedNFT
-
-deployCappedNFT(name, symbol, cap, apiKey)
-
-mintCappedNFT(contractAddress, addressToMintTo, tokenUri, apiKey)
-
-mintCappedBatchNFT(contractAddress, [recipients], [tokenURIs], apiKey)
-
-setCappedTokenURI(contractAddress, tokenId, tokenUri, apiKey)
-
-getCappedTokenURI(contractAddress, tokenId, apiKey)
 
 ### Documentation
 
-[idexo docs](https://idexo.gitbook.io/docs)
+[idexo docs](https://docs.idexo.com)
 
 ### Website
 
-[idexo.io](https://idexo.io)
+[idexo.io](https://idexo.com)

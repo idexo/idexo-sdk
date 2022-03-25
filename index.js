@@ -257,7 +257,7 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async uploadHTML(data) {
+        async uploadHTML(network, data) {
             const uploadType = "HTML"
 
             let transaction = await axios.post(
@@ -266,7 +266,7 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async uploadBuffer(data, encoding) {
+        async uploadBuffer(network, data, encoding) {
             //data must be string (should enforce that with type)
             const uploadType = "buffer"
 
@@ -276,7 +276,7 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async uploadImage(imagepath) {
+        async uploadImage(network, imagepath) {
             //data must be string (should enforce that with type)
             const uploadType = "image"
             const contentType = mime.getType(imagepath)
