@@ -1,17 +1,17 @@
 const axios = require("axios")
 const fs = require("fs").promises
 const mime = require("mime")
-
-const arweavePostUrl = "https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave"
-const ethereumPostUrl = "https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-eth"
-const ethPostUrlOne = "https://mainneteth.idexo.io"
-const multiPostUrl = "https://multiclass.idexo.io"
-const bscPostUrl = "https://idexobsc.idexo.io"
-const bscPostUrlOne = "https://mainnetbsc.idexo.io"
-const polygonPostUrl = "https://polygon.idexo.io"
 const reactPostUrl = "https://react.idexo.io"
-const avalanchePostUrl = "https://avalanche.idexo.io"
-const fantomUrl = "https://fantom.idexo.io"
+
+const chainURLs = {
+    arweave: "https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave",
+    avalanche: "https://avalanche.idexo.io",
+    binance: "https://mainnetbsc.idexo.io",
+    ethereum: "https://mainneteth.idexo.io",
+    fantom: "https://fantom.idexo.io",
+    polygon: "https://polygon.idexo.io"
+
+}
 
 function headers(apiKey) {
     return {
@@ -23,12 +23,236 @@ function headers(apiKey) {
 }
 
 const IdexoSDK = {
-    Arweave: {
-        async uploadPlain(data) {
+    Marketplace: {
+        async deployMarketplace(network, tradingFee, type, apiKey) {
+            if type = "simple" {
+                const transactionType = "deploySimpleMarketplace"
+
+                let transaction = await axios.post(
+                    chainURLs.network,
+                    JSON.stringify({
+                        tradingFee: tradingFee,
+                        transactionType: transactionType
+                    }),
+                    headers(apiKey)
+                )
+                return transaction
+            }
+            else if type = "auction" {
+                const transactionType = "deployAuctionMarketplace"
+
+                let transaction = await axios.post(
+                    chainURLs.network,
+                    JSON.stringify({
+                        tradingFee: tradingFee,
+                        transactionType: transactionType
+                    }),
+                    headers(apiKey)
+                )
+                return transaction
+            }
+        },
+        async addNFTContract(network, contractAddress, nftcontract, apiKey) {
+            const transactionType = "addMarketplaceNFTContract"
+
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    nftcontract: nftcontract,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+       
+    },
+
+    Multi: {
+        async mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes) {
+            const contentType = mime.getType(imagepath)
+            const image = await fs.readFile(imagepath, { encoding: "base64" })
+            const transactionType = "mintNFTWithImage"
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    addressToMintTo: addressToMintTo,
+                    image: image,
+                    contentType: contentType,
+                    nftName: nftName,
+                    nftDescription: nftDescription,
+                    attributes: attributes,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        
+    },
+
+    NFTs: {
+        
+        async createCollection(network, name, symbol, capped, apiKey, cap) {
+
+            if capped = 'true' {
+            const transactionType = "createCollection"
+
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol, cap: cap }),
+                headers(apiKey)
+            )
+            return transaction
+            }
+
+            else {
+            const transactionType = "createCollectionUncapped"
+
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
+                headers(apiKey)
+            )
+            return transaction
+
+            }
+        },
+        
+        async mintNFT(network, contractAddress, mintToAddress, tokenUri, apiKey) {
+            const transactionType = "mintNFT"
+
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({
+                    transactionType: transactionType,
+                    contractAddress: contractAddress,
+                    mintToAddress: mintToAddress,
+                    tokenUri: tokenUri
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async mintNFTBatch(network, contractAddress, recipients, tokenUris, apiKey) {
+            const transactionType = "mintNFTBatch"
+
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({
+                    transactionType: transactionType,
+                    contractAddress: contractAddress,
+                    recipients: recipients,
+                    tokenUris: tokenUris
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        }, 
+        async setTokenURI(network, contractAddress, tokenId, tokenUri, apiKey) {
+            const transactionType = "setTokenURI"
+
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    tokenId: tokenId,
+                    tokenUri: tokenUri,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async getTokenURI(network, contractAddress, tokenId, apiKey) {
+            const transactionType = "getTokenURI"
+
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    tokenId: tokenId,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        }
+    },
+
+     React: {
+        async createCollection(network, name, symbol, apiKey) {
+            const transactionType = "createCollection"
+
+            let transaction = await axios.post(
+                reactPostUrl,
+                JSON.stringify({ name: name, symbol: symbol, transactionType: transactionType, network: network }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        
+        async mintNFT(
+            contractAddress,
+            network,
+            addressToMintTo,
+            image,
+            contentType,
+            nftName,
+            nftDescription,
+            attributes,
+            apiKey
+        ) {
+            const transactionType = "mintNFT"
+
+            let transaction = await axios.post(
+                reactPostUrl,
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    addressToMintTo: addressToMintTo,
+                    image: image,
+                    contentType: contentType,
+                    nftName: nftName,
+                    nftDescription: nftDescription,
+                    attributes: attributes,
+                    transactionType: transactionType,
+                    network: network
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        }
+    },
+
+    
+    Staking: {
+        async deployPool(network, name, symbol, baseUri, multi, depositTokens, rewardTokens, apiKey) {
+            if multi = 'true' {
+            const transactionType = "deployStakingPool"
+            const poolType = "multiRewards"
+
+            let transaction = await axios.post(
+                chainURLs.network,
+                JSON.stringify({ tokenType: tokenType, name: name, symbol: symbol }),
+                headers(apiKey)
+            )
+            return transaction
+            }
+            else {
+                const transactionType = "deployStakingPool"
+                const poolType = "singleRewards"
+            }
+        },
+       
+    },
+     Storage: {
+        async uploadPlain(network, data) {
             const uploadType = "plainText"
 
             let transaction = await axios.post(
-                arweavePostUrl,
+                chainURLs.network,
                 JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" })
             )
             return transaction
@@ -37,7 +261,7 @@ const IdexoSDK = {
             const uploadType = "HTML"
 
             let transaction = await axios.post(
-                arweavePostUrl,
+                chainURLs.network,
                 JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" })
             )
             return transaction
@@ -47,7 +271,7 @@ const IdexoSDK = {
             const uploadType = "buffer"
 
             let transaction = await axios.post(
-                arweavePostUrl,
+                chainURLs.network,
                 JSON.stringify({ uploadType: uploadType, data: data, encoding: encoding })
             )
             return transaction
@@ -59,94 +283,44 @@ const IdexoSDK = {
             const image = await fs.readFile(imagepath, { encoding: "base64" })
 
             let transaction = await axios.post(
-                arweavePostUrl,
+                chainURLs.network,
                 JSON.stringify({ uploadType: uploadType, image: image, contentType: contentType })
             )
             return transaction
         }
     },
-
-    Binance: {
-        async deployBEP20(name, symbol, apiKey) {
-            const transactionType = "deployBEP20Standard"
+    Tokens: {
+        async deployToken(network, name, symbol, capped, apiKey, cap) {
+            
+            if capped = 'true' {
+                const transactionType = "deployToken"
+                const tokenType = "capped"
 
             let transaction = await axios.post(
-                bscPostUrlOne,
-                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
+                chainURLs.network,
+                JSON.stringify({ transactionType: transactionType, tokenType: tokenType, cap: cap, name: name, symbol: symbol }),
                 headers(apiKey)
             )
             return transaction
-        },
-        async deployBEP20Test(name, symbol, apiKey) {
-            const transactionType = "createBEP20"
+            }
+            else {
+                const transactionType = "deployToken"
+                const tokenType = "simple"
+            
 
             let transaction = await axios.post(
-                bscPostUrl,
-                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                headers(apiKey)
+                chainURLs.network,
+                JSON.stringify({ transactionType: transactionType, tokenType: tokenType, name: name, symbol: symbol })
             )
             return transaction
+            }
         },
-        async deployBEP20CappedTest(cap, name, symbol, apiKey) {
-            const transactionType = "createBEP20WithCap"
+        
+        async mintToken(network, contractAddress, mintToAddress, amount, apiKey) {
+            const transactionType = "mintToken"
 
             let transaction = await axios.post(
-                bscPostUrl,
-                JSON.stringify({ transactionType: transactionType, cap: cap, name: name, symbol: symbol }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async deployBEP20Capped(cap, name, symbol, apiKey) {
-            const transactionType = "createBEP20WCapMain"
-
-            let transaction = await axios.post(
-                bscPostUrlOne,
-                JSON.stringify({ transactionType: transactionType, cap: cap, name: name, symbol: symbol }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async deployBEP721(name, symbol, apiKey) {
-            const transactionType = "deployBEP721"
-
-            let transaction = await axios.post(
-                bscPostUrlOne,
-                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async deployBEP721Test(name, symbol, apiKey) {
-            const transactionType = "createBEP721"
-
-            let transaction = await axios.post(
-                bscPostUrl,
-                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintBEP721(contractAddress, mintToAddress, tokenUri, apiKey) {
-            const transactionType = "mintBEP721"
-
-            let transaction = await axios.post(
-                bscPostUrl,
-                JSON.stringify({
-                    transactionType: transactionType,
-                    contractAddress: contractAddress,
-                    mintToAddress: mintToAddress,
-                    tokenUri: tokenUri
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintBEP20(contractAddress, mintToAddress, amount, apiKey) {
-            const transactionType = "mintBEP20Standard"
-
-            let transaction = await axios.post(
-                bscPostUrlOne,
+                chainURLs.network,
                 JSON.stringify({
                     transactionType: transactionType,
                     contractAddress: contractAddress,
@@ -159,110 +333,33 @@ const IdexoSDK = {
         }
     },
 
-    Ethereum: {
-        async deployERC20(name, symbol) {
-            const tokenType = "simpleERC20"
+
+    Vesting: {
+        async deployVesting(network, depositToken, beneficiary, startTime, cliffMonth, durationMonth, apiKey) {
+            const transactionType = "deployVesting"
 
             let transaction = await axios.post(
-                ethereumPostUrl,
-                JSON.stringify({ tokenType: tokenType, name: name, symbol: symbol })
-            )
-            return transaction
-        },
-        async deployERC20Capped(cap, name, symbol, apiKey) {
-            const transactionType = "deployCappedERC20"
-
-            let transaction = await axios.post(
-                ethPostUrlOne,
-                JSON.stringify({ transactionType: transactionType, cap: cap, name: name, symbol: symbol }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintERC20(contractAddress, mintToAddress, amount, apiKey) {
-            const transactionType = "mintERC20Standard"
-
-            let transaction = await axios.post(
-                ethPostUrlOne,
+                chainURLs.network,
                 JSON.stringify({
-                    transactionType: transactionType,
-                    contractAddress: contractAddress,
-                    mintToAddress: mintToAddress,
-                    amount: amount
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        }
-    },
-    Fantom: {
-        async deployNFTCollection(name, symbol, apiKey) {
-            const tokenType = "standardNFTCollection"
-
-            let transaction = await axios.post(
-                fantomUrl,
-                JSON.stringify({ tokenType: tokenType, name: name, symbol: symbol }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintNFT(contractAddress, name, description, tokenuri, apiKey) {
-            const transactionType = "standardNFTMint"
-
-            let transaction = await axios.post(
-                fantomUrl,
-                JSON.stringify({ transactionType: transactionType, name: name, description: description, tokenUri: tokenuri }),
-                headers(apiKey)
-            )
-            return transaction
-        }
-    },
-
-    Multi: {
-        async mintAvaxAr(contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes) {
-            const contentType = mime.getType(imagepath)
-            const image = await fs.readFile(imagepath, { encoding: "base64" })
-            const transactionType = "mintAvaxAr"
-            let transaction = await axios.post(
-                bscPostUrlOne,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    addressToMintTo: addressToMintTo,
-                    image: image,
-                    contentType: contentType,
-                    nftName: nftName,
-                    nftDescription: nftDescription,
-                    attributes: attributes,
+                    depositToken: depositToken,
+                    beneficiary: beneficiary,
+                    startTime: startTime,
+                    cliffMonth: cliffMonth,
+                    durationMonth: durationMonth,
                     transactionType: transactionType
                 }),
                 headers(apiKey)
             )
             return transaction
         },
-        async deployERC721ArEth(name, symbol, imagepath, apiKey) {
-            const contentType = mime.getType(imagepath)
-            const image = await fs.readFile(imagepath, { encoding: "base64" })
+        async depositInitial(network, contractAddress, amount, apiKey) {
+            const transactionType = "depositInitial"
+
             let transaction = await axios.post(
-                multiPostUrl,
-                JSON.stringify({ name: name, symbol: symbol, image: image, contentType: contentType }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintBscAr(contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes) {
-            const contentType = mime.getType(imagepath)
-            const image = await fs.readFile(imagepath, { encoding: "base64" })
-            const transactionType = "mintBscAr"
-            let transaction = await axios.post(
-                bscPostUrlOne,
+                chainURLs.network,
                 JSON.stringify({
                     contractAddress: contractAddress,
-                    addressToMintTo: addressToMintTo,
-                    image: image,
-                    contentType: contentType,
-                    nftName: nftName,
-                    nftDescription: nftDescription,
-                    attributes: attributes,
+                    amount: amount,
                     transactionType: transactionType
                 }),
                 headers(apiKey)
@@ -271,290 +368,9 @@ const IdexoSDK = {
         }
     },
 
-    Polygon: {
-        async deployCappedNFT(name, symbol, cap, apiKey) {
-            const transactionType = "deployCappedNFT"
+   
 
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    name: name,
-                    symbol: symbol,
-                    cap: cap,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintCappedNFT(contractAddress, addressToMintTo, tokenUri, apiKey) {
-            const transactionType = "mintCappedNFT"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    addressToMintTo: addressToMintTo,
-                    tokenUri: tokenUri,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintCappedBatchNFT(contractAddress, recipients, tokenURIs, apiKey) {
-            const transactionType = "mintCappedBatchNFT"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    recipients: recipients,
-                    tokenURIs: tokenURIs,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-
-        async setCappedTokenURI(contractAddress, tokenId, tokenUri, apiKey) {
-            const transactionType = "setCappedTokenURI"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    tokenId: tokenId,
-                    tokenUri: tokenUri,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-
-        async getCappedTokenURI(contractAddress, tokenId, apiKey) {
-            const transactionType = "getCappedTokenURI"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    tokenId: tokenId,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        }
-    },
-
-    React: {
-        async createBEP721(name, symbol, apiKey) {
-            const transactionType = "createBEP721"
-
-            let transaction = await axios.post(
-                reactPostUrl,
-                JSON.stringify({ name: name, symbol: symbol, transactionType: transactionType }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async createBEP721Test(name, symbol, apiKey) {
-            const transactionType = "createBEP721Test"
-
-            let transaction = await axios.post(
-                reactPostUrl,
-                JSON.stringify({ name: name, symbol: symbol, transactionType: transactionType }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintBEP721(
-            contractAddress,
-            addressToMintTo,
-            image,
-            contentType,
-            nftName,
-            nftDescription,
-            attributes,
-            apiKey
-        ) {
-            const transactionType = "mintBscAr"
-
-            let transaction = await axios.post(
-                reactPostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    addressToMintTo: addressToMintTo,
-                    image: image,
-                    contentType: contentType,
-                    nftName: nftName,
-                    nftDescription: nftDescription,
-                    attributes: attributes,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        }
-    },
-
-    Avalanche: {
-        async deploySimpleNFT(name, symbol, apiKey) {
-            const transactionType = "deploySimpleNFT"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    name: name,
-                    symbol: symbol,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintSimpleNFT(contractAddress, addressToMintTo, tokenUri, apiKey) {
-            const transactionType = "mintSimpleNFT"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    addressToMintTo: addressToMintTo,
-                    tokenUri: tokenUri,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintSimpleBatchNFT(contractAddress, recipients, tokenURIs, apiKey) {
-            const transactionType = "mintSimpleBatchNFT"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    recipients: recipients,
-                    tokenURIs: tokenURIs,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-
-        async setSimpleTokenURI(contractAddress, tokenId, tokenUri, apiKey) {
-            const transactionType = "setSimpleTokenURI"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    tokenId: tokenId,
-                    tokenUri: tokenUri,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-
-        async getSimpleTokenURI(contractAddress, tokenId, apiKey) {
-            const transactionType = "getSimpleTokenURI"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    tokenId: tokenId,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-
-        async deployCappedNFT(name, symbol, cap, apiKey) {
-            const transactionType = "deployCappedNFT"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    name: name,
-                    symbol: symbol,
-                    cap: cap,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintCappedNFT(contractAddress, addressToMintTo, tokenUri, apiKey) {
-            const transactionType = "mintCappedNFT"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    addressToMintTo: addressToMintTo,
-                    tokenUri: tokenUri,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async mintCappedBatchNFT(contractAddress, recipients, tokenURIs, apiKey) {
-            const transactionType = "mintCappedBatchNFT"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    recipients: recipients,
-                    tokenURIs: tokenURIs,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-
-        async setCappedTokenURI(contractAddress, tokenId, tokenUri, apiKey) {
-            const transactionType = "setCappedTokenURI"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    tokenId: tokenId,
-                    tokenUri: tokenUri,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-
-        async getCappedTokenURI(contractAddress, tokenId, apiKey) {
-            const transactionType = "getCappedTokenURI"
-
-            let transaction = await axios.post(
-                avalanchePostUrl,
-                JSON.stringify({
-                    contractAddress: contractAddress,
-                    tokenId: tokenId,
-                    transactionType: transactionType
-                }),
-                headers(apiKey)
-            )
-            return transaction
-        }
-    }
+    
 }
 
 module.exports = IdexoSDK
