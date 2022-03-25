@@ -60,13 +60,17 @@ mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, 
 ### Project Tokens
 
 deployToken(network, name, symbol, capped, apiKey, cap)
+
 mintToken(network, contractAddress, mintToAddress, amount, apiKey)
 
 ### Storage
 
 uploadPlain(network, data)
+
 uploadHTML(network, data)
+
 uploadBuffer(network, data, encoding)
+
 uploadImage(network, imagepath)
 
 ### Staking
@@ -77,7 +81,16 @@ deployPool(network, name, symbol, baseUri, multi, depositTokens, rewardTokens, a
 
 deployVesting(network, depositToken, beneficiary, startTime, cliffMonth, durationMonth, apiKey)
 
+## Available Networks
 
+The following networks are currently supported: 
+
+* Arweave
+* Avalanche
+* BNBchain
+* Ethereum
+* Fantom
+* Polygon
 
 
 ### Documentation
