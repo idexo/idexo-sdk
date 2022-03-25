@@ -25,7 +25,7 @@ function headers(apiKey) {
 const IdexoSDK = {
     Marketplace: {
         async deployMarketplace(network, tradingFee, marketType, apiKey) {
-            if marketType == "simple" {
+            if (marketType == "simple") {
                 const transactionType = "deploySimpleMarketplace"
 
                 let transaction = await axios.post(
@@ -38,7 +38,7 @@ const IdexoSDK = {
                 )
                 return transaction
             }
-            else if marketType == "auction" {
+            else if (marketType == "auction") {
                 const transactionType = "deployAuctionMarketplace"
 
                 let transaction = await axios.post(
@@ -97,7 +97,7 @@ const IdexoSDK = {
         
         async createCollection(network, name, symbol, capped, apiKey, cap) {
 
-            if capped == 'true' {
+            if (capped == 'true') {
             const transactionType = "createCollection"
 
             let transaction = await axios.post(
@@ -229,7 +229,7 @@ const IdexoSDK = {
     
     Staking: {
         async deployPool(network, name, symbol, baseUri, multi, depositTokens, rewardTokens, apiKey) {
-            if multi == 'true' {
+            if (multi == 'true') {
             const transactionType = "deployStakingPool"
             const poolType = "multiRewards"
 
@@ -292,7 +292,7 @@ const IdexoSDK = {
     Tokens: {
         async deployToken(network, name, symbol, capped, apiKey, cap) {
             
-            if capped = 'true' {
+            if (capped = 'true') {
                 const transactionType = "deployToken"
                 const tokenType = "capped"
 
