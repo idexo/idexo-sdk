@@ -99,4 +99,4 @@ The following networks are currently supported:
 
 ### Website
 
-[idexo.io](https://idexo.com)
+[idexo.com](https://idexo.com)
