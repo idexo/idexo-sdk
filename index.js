@@ -4,7 +4,7 @@ const mime = require("mime")
 const reactPostUrl = "https://react.idexo.io"
 
 const chainURLs = {
-    arweave: "https://nigxx0onpl.execute-api.us-east-1.amazonaws.com/default/post-arweave",
+    arweave: "https://ziparweave.idexo.io",
     avalanche: "https://avalanche.idexo.io",
     binance: "https://mainnetbsc.idexo.io",
     ethereum: "https://mainneteth.idexo.io",
@@ -221,6 +221,7 @@ const IdexoSDK = {
             }
         }
     },
+
     Storage: {
         async uploadPlain(network, data) {
             const uploadType = "plainText"
@@ -251,6 +252,7 @@ const IdexoSDK = {
             return transaction
         }
     },
+
     Tokens: {
         async deployToken(network, name, symbol, capped, apiKey, cap) {
             if ((capped = "true")) {
