@@ -100,3 +100,7 @@ The following networks are currently supported:
 ### Website
 
 [idexo.com](https://idexo.com)
+
+### Token
+
+[the $IDO token](https://token.idexo.io)
