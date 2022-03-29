@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ZIPWeb3/idexo-sdk.git"
+    "url": "git+https://github.com/idexo/idexo-sdk.git"
   },
   "keywords": [
     "idexo",
@@ -27,9 +27,9 @@
   "author": "Greg Marlin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ZIPWeb3/idexo-sdk/issues"
+    "url": "https://github.com/idexo/idexo-sdk/issues"
   },
-  "homepage": "https://github.com/ZIPWeb3/idexo-sdk#readme",
+  "homepage": "https://github.com/idexo/idexo-sdk#readme",
   "dependencies": {
     "axios": "^0.21.4",
     "mime": "^2.5.2"
