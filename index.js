@@ -255,7 +255,7 @@ const IdexoSDK = {
 
     Tokens: {
         async deployToken(network, name, symbol, capped, apiKey, cap) {
-            if ((capped = "true")) {
+            if (capped == "true") {
                 const transactionType = "deployToken"
                 const tokenType = "capped"
 
