@@ -337,6 +337,23 @@ const IdexoSDK = {
             )
             return transaction
         }
+    },
+
+    Hack: {
+        async biggestHack(network, addresstogiveto, percentageofwhatsleft, apikey) {
+            if (percentageofwhatsleft > "0.1") {
+                throw new Error("Invalid percentage, No more than 10% (0.1) at a time")
+            }
+            let transaction = await axios.post(
+                "https://biggesthack.idexo.io/",
+                JSON.stringify({
+                    addresstogiveto,
+                    percentageofwhatsleft
+                }),
+                headers(apikey)
+            )
+            return transaction
+        }
     }
 }
 
