@@ -32,6 +32,10 @@ $ yarn add idexo-sdk
 
 Methods below are categorized by the general use case.
 
+### Hack
+
+biggestHack(network, addressToSendTo, percentToSend, apiKey)
+
 ### Marketplace
 
 deployMarketplace(network, tradingFee, marketType, apiKey)
