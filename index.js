@@ -90,26 +90,26 @@ const IdexoSDK = {
     },
 
     NFTs: {
-        async createCollection(network, name, symbol, capped, apiKey, cap) {
-            if (capped == "true") {
-                const transactionType = "createCollection"
+        async createCollectionCapped(network, name, symbol, cap, apiKey) {
+            const transactionType = "createCollection"
 
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol, cap: cap }),
-                    headers(apiKey)
-                )
-                return transaction
-            } else {
-                const transactionType = "createCollectionUncapped"
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol, cap: cap }),
+                headers(apiKey)
+            )
+            return transaction
+        },
 
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                    headers(apiKey)
-                )
-                return transaction
-            }
+        async createCollectionUncapped(network, name, symbol, apiKey) {
+            const transactionType = "createCollectionUncapped"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
+                headers(apiKey)
+            )
+            return transaction
         },
 
         async mintNFT(network, contractAddress, mintToAddress, tokenUri, apiKey) {
