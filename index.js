@@ -90,28 +90,26 @@ const IdexoSDK = {
     },
 
     NFTs: {
-        async createCollection(network, name, symbol, capped, apiKey, cap) {
-            if (capped == "true") {
-                const transactionType = "createCollection"
+        async createCollectionCapped(network, name, symbol, cap, apiKey) {
+            const transactionType = "createCollection"
 
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol, cap: cap }),
-                    headers(apiKey)
-                )
-                return transaction
-            } else {
-                const transactionType = "createCollectionUncapped"
-
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
-                    headers(apiKey)
-                )
-                return transaction
-            }
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol, cap: cap }),
+                headers(apiKey)
+            )
+            return transaction
         },
+        async createCollectionUncapped(network, name, symbol, apiKey) {
+            const transactionType = "createCollectionUncapped"
 
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
+                headers(apiKey)
+            )
+            return transaction
+        },
         async mintNFT(network, contractAddress, mintToAddress, tokenUri, apiKey) {
             const transactionType = "mintNFT"
 
@@ -184,7 +182,6 @@ const IdexoSDK = {
             )
             return transaction
         },
-
         async mintNFT(contractAddress, network, addressToMintTo, image, contentType, nftName, nftDescription, attributes, apiKey) {
             const transactionType = "mintNFT"
 
@@ -254,40 +251,39 @@ const IdexoSDK = {
     },
 
     Tokens: {
-        async deployToken(network, name, symbol, capped, apiKey, cap) {
-            if (capped == "true") {
-                const transactionType = "deployToken"
-                const tokenType = "capped"
+        async deployTokenCapped(network, name, symbol, cap, apiKey) {
+            const transactionType = "deployToken"
+            const tokenType = "capped"
 
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({
-                        transactionType: transactionType,
-                        tokenType: tokenType,
-                        cap: cap,
-                        name: name,
-                        symbol: symbol
-                    }),
-                    headers(apiKey)
-                )
-                return transaction
-            } else {
-                const transactionType = "deployToken"
-                const tokenType = "simple"
-
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({
-                        transactionType: transactionType,
-                        tokenType: tokenType,
-                        name: name,
-                        symbol: symbol
-                    })
-                )
-                return transaction
-            }
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    transactionType: transactionType,
+                    tokenType: tokenType,
+                    cap: cap,
+                    name: name,
+                    symbol: symbol
+                }),
+                headers(apiKey)
+            )
+            return transaction
         },
+        async deployTokenSimple(network, name, symbol, apiKey) {
+            const transactionType = "deployToken"
+            const tokenType = "simple"
 
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    transactionType: transactionType,
+                    tokenType: tokenType,
+                    name: name,
+                    symbol: symbol
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
         async mintToken(network, contractAddress, mintToAddress, amount, apiKey) {
             const transactionType = "mintToken"
 
