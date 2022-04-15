@@ -279,7 +279,8 @@ const IdexoSDK = {
                     tokenType: tokenType,
                     name: name,
                     symbol: symbol
-                })
+                }),
+                headers(apiKey)
             )
             return transaction
         },
