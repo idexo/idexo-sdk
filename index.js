@@ -100,7 +100,6 @@ const IdexoSDK = {
             )
             return transaction
         },
-
         async createCollectionUncapped(network, name, symbol, apiKey) {
             const transactionType = "createCollectionUncapped"
 
@@ -111,7 +110,6 @@ const IdexoSDK = {
             )
             return transaction
         },
-
         async mintNFT(network, contractAddress, mintToAddress, tokenUri, apiKey) {
             const transactionType = "mintNFT"
 
@@ -184,7 +182,6 @@ const IdexoSDK = {
             )
             return transaction
         },
-
         async mintNFT(contractAddress, network, addressToMintTo, image, contentType, nftName, nftDescription, attributes, apiKey) {
             const transactionType = "mintNFT"
 
@@ -287,7 +284,6 @@ const IdexoSDK = {
                 return transaction
             }
         },
-
         async mintToken(network, contractAddress, mintToAddress, amount, apiKey) {
             const transactionType = "mintToken"
 
