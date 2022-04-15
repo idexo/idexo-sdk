@@ -251,38 +251,37 @@ const IdexoSDK = {
     },
 
     Tokens: {
-        async deployToken(network, name, symbol, capped, apiKey, cap) {
-            if (capped == "true") {
-                const transactionType = "deployToken"
-                const tokenType = "capped"
+        async deployTokenCapped(network, name, symbol, cap, apiKey) {
+            const transactionType = "deployToken"
+            const tokenType = "capped"
 
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({
-                        transactionType: transactionType,
-                        tokenType: tokenType,
-                        cap: cap,
-                        name: name,
-                        symbol: symbol
-                    }),
-                    headers(apiKey)
-                )
-                return transaction
-            } else {
-                const transactionType = "deployToken"
-                const tokenType = "simple"
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    transactionType: transactionType,
+                    tokenType: tokenType,
+                    cap: cap,
+                    name: name,
+                    symbol: symbol
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async deployTokenSimple(network, name, symbol, apiKey) {
+            const transactionType = "deployToken"
+            const tokenType = "simple"
 
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({
-                        transactionType: transactionType,
-                        tokenType: tokenType,
-                        name: name,
-                        symbol: symbol
-                    })
-                )
-                return transaction
-            }
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    transactionType: transactionType,
+                    tokenType: tokenType,
+                    name: name,
+                    symbol: symbol
+                })
+            )
+            return transaction
         },
         async mintToken(network, contractAddress, mintToAddress, amount, apiKey) {
             const transactionType = "mintToken"
