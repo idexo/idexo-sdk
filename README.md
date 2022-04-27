@@ -42,7 +42,9 @@ addNFTContract(network, contractAddress, nftcontract, apiKey)
 
 ### NFT
 
-createCollection(network, name, symbol, capped, apiKey, cap)
+createCollectionCapped(network, name, symbol, cap, apiKey)
+
+createCollectionUncapped(network, name, symbol, apiKey)
 
 mintNFT(network, contractAddress, addressToMintTo, tokenUri, apiKey)
 
