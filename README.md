@@ -88,10 +88,11 @@ The following networks are currently supported:
 
 * Arweave
 * Avalanche
-* BNBchain
+* BNBchain (fka Binance Smart Chain)
 * Ethereum
 * Fantom
 * Polygon
+* Solana
 
 
 ### Documentation

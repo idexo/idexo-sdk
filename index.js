@@ -9,7 +9,8 @@ const chainURLs = {
     binance: "https://mainnetbsc.idexo.io",
     ethereum: "https://mainneteth.idexo.io",
     fantom: "https://fantom.idexo.io",
-    polygon: "https://polygon.idexo.io"
+    polygon: "https://polygon.idexo.io",
+    solana: "https://solana.idexo.io"
 }
 
 function headers(apiKey) {
