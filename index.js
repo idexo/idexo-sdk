@@ -2,6 +2,7 @@ const axios = require("axios")
 const fs = require("fs").promises
 const mime = require("mime")
 const reactPostUrl = "https://react.idexo.io"
+const utilsUrl = "https://transactions.idexo.io"
 
 const chainURLs = {
     arweave: "https://ziparweave.idexo.io",
@@ -333,6 +334,13 @@ const IdexoSDK = {
                 headers(apiKey)
             )
             return transaction
+        }
+    },
+
+    Utils: {
+        async getContractAddress(network, transactionHash, apiKey) {
+            let payload = { path: "contract", network: network, hash: transactionHash }
+            return await axios.get(utilsUrl, { params: payload, headers: headers(apiKey) })
         }
     }
 }
