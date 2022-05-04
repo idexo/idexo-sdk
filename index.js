@@ -1,5 +1,4 @@
 const axios = require("axios")
-const url = require("url")
 const fs = require("fs").promises
 const mime = require("mime")
 const reactPostUrl = "https://react.idexo.io"
