@@ -341,17 +341,7 @@ const IdexoSDK = {
     Utils: {
         async getContractAddress(network, transactionHash, apiKey) {
             let payload = { path: "contract", network: network, hash: transactionHash }
-            const params = new url.URLSearchParams(payload)
-            const headers = headers(apiKey)
-            const config = {
-                method: "get",
-                url: `${utilsUrl}/?${params}`,
-                headers
-            }
-
-            let res = await axios(config)
-
-            return res
+            return await axios.get(utilsUrl, { params: payload, headers: headers(apiKey) })
         }
     }
 }
