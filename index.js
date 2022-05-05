@@ -93,7 +93,7 @@ const IdexoSDK = {
 
     NFTs: {
         async createCollectionCapped(network, name, symbol, cap, apiKey) {
-            const transactionType = "createCollection"
+            const transactionType = "createCollectionCapped"
 
             let transaction = await axios.post(
                 chainURLs[network],
