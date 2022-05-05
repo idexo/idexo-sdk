@@ -341,6 +341,10 @@ const IdexoSDK = {
         async getContractAddress(network, transactionHash, apiKey) {
             let payload = { path: "contract", network: network, hash: transactionHash }
             return await axios.get(utilsUrl, { params: payload, headers: headers(apiKey) })
+        },
+        async getTransactions(network, timestampFrom, timestampTo, apiKey) {
+            let payload = { path: "transactions", network: network, from: timestampFrom, to: timestampTo }
+            return await axios.get(utilsUrl, { params: payload, headers: headers(apiKey) })
         }
     }
 }
