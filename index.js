@@ -69,7 +69,7 @@ const IdexoSDK = {
     },
 
     Multi: {
-        async mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes) {
+        async mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, nftDescription, attributes, apiKey) {
             const contentType = mime.getType(imagepath)
             const image = await fs.readFile(imagepath, { encoding: "base64" })
             const transactionType = "mintNFTWithImage"

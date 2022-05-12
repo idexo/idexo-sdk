@@ -57,12 +57,14 @@ getTokenURI(network, contractAddress, tokenId, apiKey)
 
 ### Multi
 
-mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, nftDescription, apiKey, attributes)
+mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, nftDescription, attributes, apiKey)
 
 
 ### Project Tokens
 
-deployToken(network, name, symbol, capped, apiKey, cap)
+deployTokenCapped(network, name, symbol, cap, apiKey)
+
+deployTokenSimple(network, name, symbol, apiKey)
 
 mintToken(network, contractAddress, mintToAddress, amount, apiKey)
 
@@ -84,9 +86,17 @@ deployPool(network, name, symbol, baseUri, multi, depositTokens, rewardTokens, a
 
 deployVesting(network, depositToken, beneficiary, startTime, cliffMonth, durationMonth, apiKey)
 
+depositInitial(network, contractAddress, amount, apiKey)
+
+### Utils
+
+getContractAddress(network, transactionHash, apiKey)
+
+getTransactions(network, timestampFrom, timestampTo, apiKey)
+
 ## Available Networks
 
-The following networks are currently supported: 
+The following networks are currently supported:
 
 * Arweave
 * Avalanche
