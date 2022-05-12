@@ -57,7 +57,14 @@ getTokenURI(network, contractAddress, tokenId, apiKey)
 
 ### Multi
 
-mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, nftDescription, attributes, apiKey)
+
+mintNFTWithImage(network, contractAddress, addressToMintTo, image, nftName, nftDescription, apiKey, attributes, [imageIsBase64], [contentType])
+| Parameter      | Datatype  | Description                                       |
+| -------------- |:---------:| -------------------------------------------------:|
+| image          | string    | image path OR base64 encoded image                |
+| [imageIsBase64]| bool      | Default = false. optional if image is image path  |
+| [contentType]  | string    | optional if image is image path. Ex. "image/jpeg" |
+
 
 
 ### Project Tokens
