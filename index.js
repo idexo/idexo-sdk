@@ -74,6 +74,7 @@ const IdexoSDK = {
                 image = await fs.readFile(image, { encoding: "base64" })
                 contentType = mime.getType(image)
             }
+            const transactionType = "mintNFTWithImage"
             let transaction = await axios.post(
                 chainURLs[network],
                 JSON.stringify({
