@@ -60,7 +60,7 @@ getTokenURI(network, contractAddress, tokenId, apiKey)
 mintNFTWithImage(network, contractAddress, addressToMintTo, imagepath, nftName, nftDescription, attributes, apiKey)
 
 
-### Tokens
+### Project Tokens
 
 deployTokenCapped(network, name, symbol, cap, apiKey)
 
