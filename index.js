@@ -198,7 +198,7 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async mintNFT(contractAddress, network, addressToMintTo, image, contentType, nftName, nftDescription, attributes) {
+        async mintNFT(apiKey, contractAddress, network, addressToMintTo, image, contentType, nftName, nftDescription, attributes) {
             const transactionType = "mintNFT"
 
             let transaction = await axios.post(
@@ -236,26 +236,26 @@ const IdexoSDK = {
     },
 
     Storage: {
-        async uploadPlain(apiKey, network, data) {
+        async uploadPlain(network, data) {
             const uploadType = "plainText"
 
             let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" }))
             return transaction
         },
-        async uploadHTML(apiKey, network, data) {
+        async uploadHTML(network, data) {
             const uploadType = "HTML"
 
             let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" }))
             return transaction
         },
-        async uploadBuffer(apiKey, network, data, encoding) {
+        async uploadBuffer(network, data, encoding) {
             //data must be string (should enforce that with type)
             const uploadType = "buffer"
 
             let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: encoding }))
             return transaction
         },
-        async uploadImage(apiKey, network, imagepath) {
+        async uploadImage(network, imagepath) {
             //data must be string (should enforce that with type)
             const uploadType = "image"
             const contentType = mime.getType(imagepath)
