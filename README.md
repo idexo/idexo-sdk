@@ -101,6 +101,8 @@ getContractAddress(network, transactionHash, apiKey)
 
 getTransactions(network, timestampFrom, timestampTo, apiKey)
 
+getTransactionsByGroup(network, group, timestampFrom, timestampTo, apiKey)
+
 ## Available Networks
 
 The following networks are currently supported:
