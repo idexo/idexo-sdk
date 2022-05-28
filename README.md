@@ -77,13 +77,13 @@ mintToken(apiKey, network, contractAddress, mintToAddress, amount)
 
 ### Storage
 
-uploadPlain(apiKey, network, data)
+uploadPlain(network, data)
 
-uploadHTML(apiKey, network, data)
+uploadHTML(network, data)
 
-uploadBuffer(apiKey, network, data, encoding)
+uploadBuffer(network, data, encoding)
 
-uploadImage(apiKey, network, imagepath)
+uploadImage(network, imagepath)
 
 ### Staking
 
