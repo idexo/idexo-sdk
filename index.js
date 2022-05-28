@@ -69,8 +69,18 @@ const IdexoSDK = {
     },
 
     Multi: {
-
-        async mintNFTWithImage(network, contractAddress, addressToMintTo, image, nftName, nftDescription, apiKey, attributes, imageIsBase64 = false, contentType) {
+        async mintNFTWithImage(
+            network,
+            contractAddress,
+            addressToMintTo,
+            image,
+            nftName,
+            nftDescription,
+            apiKey,
+            attributes,
+            imageIsBase64 = false,
+            contentType
+        ) {
             if (!imageIsBase64) {
                 image = await fs.readFile(image, { encoding: "base64" })
                 contentType = mime.getType(image)
@@ -350,6 +360,11 @@ const IdexoSDK = {
         async getTransactions(network, timestampFrom, timestampTo, apiKey) {
             let request = headers(apiKey)
             request.params = { path: "transactions", network: network, from: timestampFrom, to: timestampTo }
+            return await axios.get(utilsUrl, request)
+        },
+        async getTransactionsByGroup(network, group, timestampFrom, timestampTo, apiKey) {
+            let request = headers(apiKey)
+            request.params = { path: "transactions", network: network, group: group, from: timestampFrom, to: timestampTo }
             return await axios.get(utilsUrl, request)
         }
     }
