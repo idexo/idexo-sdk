@@ -264,32 +264,32 @@ const IdexoSDK = {
     },
 
     Storage: {
-        async uploadPlain(network, data) {
+        async uploadPlain(apiKey, network, data) {
             const uploadType = "plainText"
 
-            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" }))
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" }), headers(apiKey))
             return transaction
         },
-        async uploadHTML(network, data) {
+        async uploadHTML(apiKey, network, data) {
             const uploadType = "HTML"
 
-            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" }))
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" }), headers(apiKey))
             return transaction
         },
-        async uploadBuffer(network, data, encoding) {
+        async uploadBuffer(apiKey, network, data, encoding) {
             //data must be string (should enforce that with type)
             const uploadType = "buffer"
 
-            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: encoding }))
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: encoding }), headers(apiKey))
             return transaction
         },
-        async uploadImage(network, imagepath) {
+        async uploadImage(apiKey, network, imagePath) {
             //data must be string (should enforce that with type)
             const uploadType = "image"
-            const contentType = mime.getType(imagepath)
-            const image = await fs.readFile(imagepath, { encoding: "base64" })
+            const contentType = mime.getType(imagePath)
+            const image = await fs.readFile(imagePath, { encoding: "base64" })
 
-            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, image: image, contentType: contentType }))
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, image: image, contentType: contentType }), headers(apiKey))
             return transaction
         }
     },
