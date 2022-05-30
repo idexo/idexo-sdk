@@ -199,8 +199,8 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async balanceOf(apiKey, network, contractAddress, walletAddress) {
-            const transactionType = "balanceOf"
+        async getBalanceOf(apiKey, network, contractAddress, walletAddress) {
+            const transactionType = "getBalanceOf"
 
             let transaction = await axios.post(
                 chainURLs[network],
