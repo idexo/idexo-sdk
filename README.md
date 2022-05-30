@@ -35,30 +35,34 @@ Methods below are categorized by the general use case.
 
 ### Marketplace
 
-deployMarketplace(network, tradingFee, marketType, apiKey)
+deployMarketplace(apiKey, network, tradingFee, marketType)
 
-addNFTContract(network, contractAddress, nftcontract, apiKey)
+addNFTContract(apiKey, network, contractAddress, nftcontract)
 
 
 ### NFT
 
-createCollectionCapped(network, name, symbol, cap, apiKey)
+createCollectionCapped(apiKey, network, name, symbol, cap)
 
-createCollectionUncapped(network, name, symbol, apiKey)
+createCollectionUncapped(apiKey, network, name, symbol)
 
-mintNFT(network, contractAddress, addressToMintTo, tokenUri, apiKey)
+mintNFT(apiKey, network, contractAddress, addressToMintTo, tokenUri)
 
-mintNFTBatch(network, contractAddress, [recipients], [tokenURIs], apiKey)
+mintNFTBatch(apiKey, network, contractAddress, [recipients], [tokenURIs])
 
-setTokenURI(network, contractAddress, tokenId, tokenUri, apiKey)
+setTokenURI(apiKey, network, contractAddress, tokenId, tokenUri)
 
-getTokenURI(network, contractAddress, tokenId, apiKey)
+getTokenURI(apiKey, network, contractAddress, tokenId)
+
+getTokenId(apiKey, network, contractAddress, walletAddress)
+
+getBalanceOf(apiKey, network, contractAddress, walletAddress)
 
 
 ### Multi
 
 
-mintNFTWithImage(network, contractAddress, addressToMintTo, image, nftName, nftDescription, apiKey, attributes, [imageIsBase64], [contentType])
+mintNFTWithImage(apiKey, network, contractAddress, addressToMintTo, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType])
 | Parameter      | Datatype  | Description                                       |
 | -------------- |:---------:| -------------------------------------------------:|
 | image          | string    | image path OR base64 encoded image                |
@@ -69,37 +73,39 @@ mintNFTWithImage(network, contractAddress, addressToMintTo, image, nftName, nftD
 
 ### Project Tokens
 
-deployTokenCapped(network, name, symbol, cap, apiKey)
+deployTokenCapped(apiKey, network, name, symbol, cap)
 
-deployTokenSimple(network, name, symbol, apiKey)
+deployTokenSimple(apiKey, network, name, symbol)
 
-mintToken(network, contractAddress, mintToAddress, amount, apiKey)
+mintToken(apiKey, network, contractAddress, mintToAddress, amount)
 
 ### Storage
 
-uploadPlain(network, data)
+uploadPlain(apiKey, network, data)
 
-uploadHTML(network, data)
+uploadHTML(apiKey, network, data)
 
-uploadBuffer(network, data, encoding)
+uploadBuffer(apiKey, network, data, encoding)
 
-uploadImage(network, imagepath)
+uploadImage(apiKey, network, imagePath)
 
 ### Staking
 
-deployPool(network, name, symbol, baseUri, multi, depositTokens, rewardTokens, apiKey)
+deployPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens)
 
 ### Vesting
 
-deployVesting(network, depositToken, beneficiary, startTime, cliffMonth, durationMonth, apiKey)
+deployVesting(apiKey, network, depositToken, beneficiary, startTime, cliffMonth, durationMonth)
 
-depositInitial(network, contractAddress, amount, apiKey)
+depositInitial(apiKey, network, contractAddress, amount)
 
 ### Utils
 
-getContractAddress(network, transactionHash, apiKey)
+getContractAddress(apiKey, network, transactionHash)
 
-getTransactions(network, timestampFrom, timestampTo, apiKey)
+getTransactions(apiKey, network, timestampFrom, timestampTo)
+
+getTransactionsByGroup(apiKey, network, group, timestampFrom, timestampTo)
 
 ## Available Networks
 
