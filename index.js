@@ -92,7 +92,7 @@ const IdexoSDK = {
                 JSON.stringify({
                     contractAddress: contractAddress,
                     addressToMintTo: addressToMintTo,
-                    image: image ,
+                    image: image,
                     contentType: contentType,
                     nftName: nftName,
                     nftDescription: nftDescription,
@@ -179,6 +179,34 @@ const IdexoSDK = {
                 JSON.stringify({
                     contractAddress: contractAddress,
                     tokenId: tokenId,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async getTokenIds(apiKey, network, contractAddress, walletAddress) {
+            const transactionType = "getTokenIds"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    walletAddress: walletAddress,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async balanceOf(apiKey, network, contractAddress, walletAddress) {
+            const transactionType = "balanceOf"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    walletAddress: walletAddress,
                     transactionType: transactionType
                 }),
                 headers(apiKey)
