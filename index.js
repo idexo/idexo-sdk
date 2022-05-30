@@ -74,7 +74,7 @@ const IdexoSDK = {
             network,
             contractAddress,
             addressToMintTo,
-            imagepath,
+            imagePath,
             nftName,
             nftDescription,
             attributes,
@@ -82,8 +82,8 @@ const IdexoSDK = {
             contentType
         ) {
             if (!imageIsBase64) {
-                image = await fs.readFile(imagepath, { encoding: "base64" })
-                contentType = mime.getType(imagepath)
+                image = await fs.readFile(imagePath, { encoding: "base64" })
+                contentType = mime.getType(imagePath)
             }
 
             const transactionType = "mintNFTWithImage"
@@ -92,7 +92,7 @@ const IdexoSDK = {
                 JSON.stringify({
                     contractAddress: contractAddress,
                     addressToMintTo: addressToMintTo,
-                    image: image,
+                    image: image || imagePath,
                     contentType: contentType,
                     nftName: nftName,
                     nftDescription: nftDescription,
