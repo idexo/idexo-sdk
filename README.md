@@ -54,6 +54,10 @@ setTokenURI(apiKey, network, contractAddress, tokenId, tokenUri)
 
 getTokenURI(apiKey, network, contractAddress, tokenId)
 
+getTokenId(apiKey, network, contractAddress, walletAddress)
+
+getBalanceOf(apiKey, network, contractAddress, walletAddress)
+
 
 ### Multi
 
@@ -77,13 +81,13 @@ mintToken(apiKey, network, contractAddress, mintToAddress, amount)
 
 ### Storage
 
-uploadPlain(network, data)
+uploadPlain(apiKey, network, data)
 
-uploadHTML(network, data)
+uploadHTML(apiKey, network, data)
 
-uploadBuffer(network, data, encoding)
+uploadBuffer(apiKey, network, data, encoding)
 
-uploadImage(network, imagepath)
+uploadImage(apiKey, network, imagePath)
 
 ### Staking
 
