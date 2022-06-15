@@ -185,8 +185,8 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async getTokenId(apiKey, network, contractAddress, walletAddress) {
-            const transactionType = "getTokenId"
+        async getCollectionIds(apiKey, network, contractAddress, walletAddress) {
+            const transactionType = "getCollectionIds"
 
             let transaction = await axios.post(
                 chainURLs[network],
