@@ -185,7 +185,7 @@ const IdexoSDK = {
             )
             return transaction
         },
-        async getCollectionIds(apiKey, network, contractAddress, walletAddress) {
+        async getCollectionIds(apiKey, network, contractAddress, walletAddress, withURI = false) {
             const transactionType = "getCollectionIds"
 
             let transaction = await axios.post(
@@ -193,6 +193,7 @@ const IdexoSDK = {
                 JSON.stringify({
                     contractAddress: contractAddress,
                     walletAddress: walletAddress,
+                    withURI: withURI,
                     transactionType: transactionType
                 }),
                 headers(apiKey)
@@ -289,7 +290,11 @@ const IdexoSDK = {
             const contentType = mime.getType(imagePath)
             const image = await fs.readFile(imagePath, { encoding: "base64" })
 
-            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, image: image, contentType: contentType }), headers(apiKey))
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ uploadType: uploadType, image: image, contentType: contentType }),
+                headers(apiKey)
+            )
             return transaction
         }
     },
