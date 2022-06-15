@@ -54,7 +54,7 @@ setTokenURI(apiKey, network, contractAddress, tokenId, tokenUri)
 
 getTokenURI(apiKey, network, contractAddress, tokenId)
 
-getTokenId(apiKey, network, contractAddress, walletAddress)
+getCollectionIds(apiKey, network, contractAddress, walletAddress)
 
 getBalanceOf(apiKey, network, contractAddress, walletAddress)
 
