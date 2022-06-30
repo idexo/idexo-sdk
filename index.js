@@ -277,6 +277,12 @@ const IdexoSDK = {
             let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" }), headers(apiKey))
             return transaction
         },
+        async uploadJSON(apiKey, network, data) {
+            const uploadType = "JSON"
+
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType: uploadType, data: data, encoding: "null" }), headers(apiKey))
+            return transaction
+        },
         async uploadBuffer(apiKey, network, data, encoding) {
             //data must be string (should enforce that with type)
             const uploadType = "buffer"
