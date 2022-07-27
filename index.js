@@ -126,6 +126,16 @@ const IdexoSDK = {
             )
             return transaction
         },
+        async createSBTUncapped(apiKey, network, name, symbol) {
+            const transactionType = "createSBTUncapped"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
+                headers(apiKey)
+            )
+            return transaction
+        },
         async mintNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintNFT"
 
