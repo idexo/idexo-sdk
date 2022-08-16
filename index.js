@@ -126,6 +126,28 @@ const IdexoSDK = {
             )
             return transaction
         },
+        async createCappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, cap) {
+            const transactionType = "createCappedRoyalty"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol, royaltyCollector: royaltyCollector,  royaltyBP: royaltyBP, cap: cap }),
+                headers(apiKey)
+            )
+            return transaction
+
+        },
+        async createUncappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP) {
+            const transactionType = "createUncappedRoyalty"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol, royaltyCollector: royaltyCollector,  royaltyBP: royaltyBP }),
+                headers(apiKey)
+            )
+            return transaction
+
+        },
         async createSBTUncapped(apiKey, network, name, symbol) {
             const transactionType = "createSBTUncapped"
 
@@ -148,6 +170,21 @@ const IdexoSDK = {
         },
         async mintNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintNFT"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    transactionType: transactionType,
+                    contractAddress: contractAddress,
+                    mintToAddress: mintToAddress,
+                    tokenUri: tokenUri
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async mintRoyaltyNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
+            const transactionType = "mintRoyaltyNFT"
 
             let transaction = await axios.post(
                 chainURLs[network],
