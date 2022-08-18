@@ -8,6 +8,7 @@ const chainURLs = {
     arweave: "https://ziparweave.idexo.io",
     avalanche: "https://avalanche.idexo.io",
     binance: "https://mainnetbsc.idexo.io",
+    dogechain: "https://dogechain.idexo.io",
     ethereum: "https://mainneteth.idexo.io",
     fantom: "https://fantom.idexo.io",
     polygon: "https://polygon.idexo.io",
@@ -129,6 +130,16 @@ const IdexoSDK = {
 
             return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol }), headers(apiKey))
         },
+        async createSBTCapped(apiKey, network, name, symbol) {
+            const transactionType = "createSBTCapped"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
+                headers(apiKey)
+            )
+            return transaction
+        },
         async createSBTCommunityUncapped(apiKey, network, name, symbol) {
             const transactionType = "createSBTCommunityUncapped"
 
@@ -142,6 +153,21 @@ const IdexoSDK = {
                 JSON.stringify({ transactionType, contractAddress, mintToAddress, tokenUri }),
                 headers(apiKey)
             )
+        },
+        async mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
+            const transactionType = "mintSBT"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    transactionType: transactionType,
+                    contractAddress: contractAddress,
+                    mintToAddress: mintToAddress,
+                    tokenUri: tokenUri
+                }),
+                headers(apiKey)
+            )
+            return transaction
         },
         async mintRoyaltyNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintRoyaltyNFT"
