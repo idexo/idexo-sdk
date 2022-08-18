@@ -24,6 +24,23 @@ function headers(apiKey) {
 }
 
 const IdexoSDK = {
+    Common: {
+        async transferOwnership(apiKey, network, contractAddress, newOwnerAddress) {
+            const transactionType = "transferOwnership"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    contractAddress: contractAddress,
+                    newOwnerAddress: newOwnerAddress,
+                    transactionType: transactionType
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        }
+    },
+
     Marketplace: {
         async deployMarketplace(apiKey, network, tradingFee, marketType) {
             if (marketType == "simple") {
