@@ -122,11 +122,7 @@ const IdexoSDK = {
         async createCollectionUncapped(apiKey, network, name, symbol) {
             const transactionType = "createCollectionUncapped"
 
-            let transaction = await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol }),
-                headers(apiKey)
-            )
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol }), headers(apiKey))
             return transaction
         },
         async createCappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, cap) {
@@ -152,21 +148,13 @@ const IdexoSDK = {
         async createSBTUncapped(apiKey, network, name, symbol) {
             const transactionType = "createSBTUncapped"
 
-            let transaction = await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol }),
-                headers(apiKey)
-            )
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol }), headers(apiKey))
             return transaction
         },
         async createSBTCommunityUncapped(apiKey, network, name, symbol) {
             const transactionType = "createSBTCommunityUncapped"
 
-            let transaction = await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol }),
-                headers(apiKey)
-            )
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol }), headers(apiKey))
             return transaction
         },
         async mintNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
@@ -280,11 +268,7 @@ const IdexoSDK = {
                 const transactionType = "deployStakingPool"
                 const poolType = "multiRewards"
 
-                let transaction = await axios.post(
-                    chainURLs[network],
-                    JSON.stringify({ tokenType, name, symbol }),
-                    headers(apiKey)
-                )
+                let transaction = await axios.post(chainURLs[network], JSON.stringify({ tokenType, name, symbol }), headers(apiKey))
                 return transaction
             } else {
                 const transactionType = "deployStakingPool"
@@ -328,11 +312,7 @@ const IdexoSDK = {
             //data must be string (should enforce that with type)
             const uploadType = "buffer"
 
-            let transaction = await axios.post(
-                chainURLs[network],
-                JSON.stringify({ uploadType, data, encoding }),
-                headers(apiKey)
-            )
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType, data, encoding }), headers(apiKey))
             return transaction
         },
         async uploadImage(apiKey, network, imagePath) {
@@ -341,11 +321,7 @@ const IdexoSDK = {
             const contentType = mime.getType(imagePath)
             const image = await fs.readFile(imagePath, { encoding: "base64" })
 
-            let transaction = await axios.post(
-                chainURLs[network],
-                JSON.stringify({ uploadType, image, contentType }),
-                headers(apiKey)
-            )
+            let transaction = await axios.post(chainURLs[network], JSON.stringify({ uploadType, image, contentType }), headers(apiKey))
             return transaction
         }
     },
