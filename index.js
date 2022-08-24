@@ -130,12 +130,12 @@ const IdexoSDK = {
 
             return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol }), headers(apiKey))
         },
-        async createSBTCapped(apiKey, network, name, symbol) {
+        async createSBTCapped(apiKey, network, name, symbol, cap) {
             const transactionType = "createSBTCapped"
 
             let transaction = await axios.post(
                 chainURLs[network],
-                JSON.stringify({ transactionType: transactionType, name: name, symbol: symbol }),
+                JSON.stringify({ transactionType, name, symbol, cap }),
                 headers(apiKey)
             )
             return transaction
