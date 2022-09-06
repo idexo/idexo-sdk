@@ -354,6 +354,11 @@ const IdexoSDK = {
             let request = headers(apiKey)
             request.params = { path: "transactions", network, group, from: timestampFrom, to: timestampTo }
             return await axios.get(utilsUrl, request)
+        },
+        async getTransactionsByFunction(apiKey, function_name) {
+            let request = headers(apiKey)
+            request.params = { path: "functions", function_name }
+            return await axios.get(utilsUrl, request)
         }
     }
 }
