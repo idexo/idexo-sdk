@@ -97,53 +97,57 @@ const IdexoSDK = {
     },
 
     NFTs: {
-        async createCollectionCapped(apiKey, network, name, symbol, cap) {
+        async createCollectionCapped(apiKey, network, name, symbol, cap, options) {
             const transactionType = "createCollectionCapped"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, cap }), headers(apiKey))
+            return await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType, name, symbol, cap, options }),
+                headers(apiKey)
+            )
         },
-        async createCollectionUncapped(apiKey, network, name, symbol) {
+        async createCollectionUncapped(apiKey, network, name, symbol, options) {
             const transactionType = "createCollectionUncapped"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol }), headers(apiKey))
+            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
         },
-        async createCappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, cap) {
+        async createCappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, cap, options) {
             const transactionType = "createCappedRoyalty"
 
             return await axios.post(
                 chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, royaltyCollector, royaltyBP, cap }),
+                JSON.stringify({ transactionType, name, symbol, royaltyCollector, royaltyBP, cap, options }),
                 headers(apiKey)
             )
         },
-        async createUncappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP) {
+        async createUncappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, options) {
             const transactionType = "createUncappedRoyalty"
 
             return await axios.post(
                 chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, royaltyCollector, royaltyBP }),
+                JSON.stringify({ transactionType, name, symbol, royaltyCollector, royaltyBP, options }),
                 headers(apiKey)
             )
         },
-        async createSBTUncapped(apiKey, network, name, symbol) {
-            const transactionType = "createSBTUncapped"
-
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol }), headers(apiKey))
-        },
-        async createSBTCapped(apiKey, network, name, symbol, cap) {
+        async createSBTCapped(apiKey, network, name, symbol, cap, options) {
             const transactionType = "createSBTCapped"
 
             let transaction = await axios.post(
                 chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, cap }),
+                JSON.stringify({ transactionType, name, symbol, cap, options }),
                 headers(apiKey)
             )
             return transaction
         },
-        async createSBTCommunityUncapped(apiKey, network, name, symbol) {
+        async createSBTUncapped(apiKey, network, name, symbol, options) {
+            const transactionType = "createSBTUncapped"
+
+            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
+        },
+        async createSBTCommunityUncapped(apiKey, network, name, symbol, options) {
             const transactionType = "createSBTCommunityUncapped"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol }), headers(apiKey))
+            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
         },
         async mintNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintNFT"
