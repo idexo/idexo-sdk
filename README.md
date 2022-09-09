@@ -46,6 +46,10 @@ createCollectionCapped(apiKey, network, name, symbol, cap)
 
 createCollectionUncapped(apiKey, network, name, symbol)
 
+createCappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, cap, options)
+
+createUncappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, options)
+
 mintNFT(apiKey, network, contractAddress, addressToMintTo, tokenUri)
 
 mintNFTBatch(apiKey, network, contractAddress, [recipients], [tokenURIs])
@@ -114,6 +118,7 @@ The following networks are currently supported:
 * Arweave
 * Avalanche
 * BNBchain (fka Binance Smart Chain)
+* Dogechain
 * Ethereum
 * Fantom
 * Polygon
