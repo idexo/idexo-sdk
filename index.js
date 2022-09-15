@@ -11,6 +11,7 @@ const chainURLs = {
     dogechain: "https://dogechain.idexo.io",
     ethereum: "https://mainneteth.idexo.io",
     fantom: "https://fantom.idexo.io",
+    filecoin: "https://filecoin.idexo.io",
     polygon: "https://polygon.idexo.io",
     solana: "https://solana.idexo.io"
 }
@@ -295,6 +296,37 @@ const IdexoSDK = {
             const image = await fs.readFile(imagePath, { encoding: "base64" })
 
             return await axios.post(chainURLs[network], JSON.stringify({ uploadType, image, contentType }), headers(apiKey))
+        },
+        async uploadNFTMetadata(
+            apiKey,
+            network,
+            image,
+            nftName,
+            nftDescription,
+            attributes,
+            imageIsBase64 = false,
+            contentType
+        ) {
+            if (!imageIsBase64) {
+                contentType = mime.getType(image)
+                image = await fs.readFile(image, { encoding: "base64" })
+            }
+
+            const uploadType = "NFTMetadata"
+            return await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    contractAddress,
+                    addressToMintTo,
+                    image,
+                    contentType,
+                    nftName,
+                    nftDescription,
+                    attributes,
+                    uploadype
+                }),
+                headers(apiKey)
+            )
         }
     },
 
