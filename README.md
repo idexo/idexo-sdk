@@ -93,6 +93,13 @@ uploadBuffer(apiKey, network, data, encoding)
 
 uploadImage(apiKey, network, imagePath)
 
+uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType])
+| Parameter      | Datatype  | Description                                       |
+| -------------- |:---------:| -------------------------------------------------:|
+| image          | string    | image path OR base64 encoded image                |
+| [imageIsBase64]| bool      | Default = false. optional if image is image path  |
+| [contentType]  | string    | optional if image is image path. Ex. "image/jpeg" |
+
 ### Staking
 
 deployPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens)
@@ -121,6 +128,7 @@ The following networks are currently supported:
 * Dogechain
 * Ethereum
 * Fantom
+* Filecoin
 * Polygon
 * Solana
 
