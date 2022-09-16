@@ -7,7 +7,7 @@ const utilsUrl = "https://transactions.idexo.io"
 const chainURLs = {
     arweave: "https://ziparweave.idexo.io",
     avalanche: "https://avalanche.idexo.io",
-    binance: "https://mainnetbsc.idexo.io",
+    bnbchain: "https://mainnetbsc.idexo.io",
     dogechain: "https://dogechain.idexo.io",
     ethereum: "https://mainneteth.idexo.io",
     fantom: "https://fantom.idexo.io",
@@ -227,7 +227,7 @@ const IdexoSDK = {
             )
             return transaction
         },
-    }
+    },
 
     React: {
         async createCollection(apiKey, network, name, symbol) {
