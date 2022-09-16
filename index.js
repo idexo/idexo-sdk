@@ -7,7 +7,7 @@ const utilsUrl = "https://transactions.idexo.io"
 const chainURLs = {
     arweave: "https://ziparweave.idexo.io",
     avalanche: "https://avalanche.idexo.io",
-    binance: "https://mainnetbsc.idexo.io",
+    bnbchain: "https://mainnetbsc.idexo.io",
     dogechain: "https://dogechain.idexo.io",
     ethereum: "https://mainneteth.idexo.io",
     fantom: "https://fantom.idexo.io",
@@ -130,26 +130,6 @@ const IdexoSDK = {
                 headers(apiKey)
             )
         },
-        async createSBTCapped(apiKey, network, name, symbol, cap, options) {
-            const transactionType = "createSBTCapped"
-
-            let transaction = await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, cap, options }),
-                headers(apiKey)
-            )
-            return transaction
-        },
-        async createSBTUncapped(apiKey, network, name, symbol, options) {
-            const transactionType = "createSBTUncapped"
-
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
-        },
-        async createSBTCommunityUncapped(apiKey, network, name, symbol, options) {
-            const transactionType = "createSBTCommunityUncapped"
-
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
-        },
         async mintNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintNFT"
 
@@ -158,21 +138,6 @@ const IdexoSDK = {
                 JSON.stringify({ transactionType, contractAddress, mintToAddress, tokenUri }),
                 headers(apiKey)
             )
-        },
-        async mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
-            const transactionType = "mintSBT"
-
-            let transaction = await axios.post(
-                chainURLs[network],
-                JSON.stringify({
-                    transactionType: transactionType,
-                    contractAddress: contractAddress,
-                    mintToAddress: mintToAddress,
-                    tokenUri: tokenUri
-                }),
-                headers(apiKey)
-            )
-            return transaction
         },
         async mintRoyaltyNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintRoyaltyNFT"
@@ -224,6 +189,44 @@ const IdexoSDK = {
                 headers(apiKey)
             )
         }
+    },
+
+    SBTs: {
+        async createSBTCapped(apiKey, network, name, symbol, cap, options) {
+            const transactionType = "createSBTCapped"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType, name, symbol, cap, options }),
+                headers(apiKey)
+            )
+            return transaction
+        },
+        async createSBTUncapped(apiKey, network, name, symbol, options) {
+            const transactionType = "createSBTUncapped"
+
+            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
+        },
+        async createSBTCommunityUncapped(apiKey, network, name, symbol, options) {
+            const transactionType = "createSBTCommunityUncapped"
+
+            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
+        },
+        async mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
+            const transactionType = "mintSBT"
+
+            let transaction = await axios.post(
+                chainURLs[network],
+                JSON.stringify({
+                    transactionType: transactionType,
+                    contractAddress: contractAddress,
+                    mintToAddress: mintToAddress,
+                    tokenUri: tokenUri
+                }),
+                headers(apiKey)
+            )
+            return transaction
+        },
     },
 
     React: {
