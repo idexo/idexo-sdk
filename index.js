@@ -316,7 +316,7 @@ const IdexoSDK = {
                     nftName,
                     nftDescription,
                     attributes,
-                    uploadype
+                    uploadType
                 }),
                 headers(apiKey)
             )
