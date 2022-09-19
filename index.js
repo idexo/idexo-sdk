@@ -41,11 +41,19 @@ const IdexoSDK = {
     Marketplace: {
         async deploySimpleMarketplace(apiKey, network, purchaseToken, saleStartTime, options) {
             const transactionType = "deploySimpleMarketplace"
-            return await axios.post(chainURLs[network], JSON.stringify({ purchaseToken, saleStartTime, options, transactionType }), headers(apiKey))
+            return await axios.post(
+                chainURLs[network],
+                JSON.stringify({ purchaseToken, saleStartTime, options, transactionType }),
+                headers(apiKey)
+            )
         },
         async deployAuctionMarketplace(apiKey, network, purchaseToken, maxDuration, options) {
             const transactionType = "deployAuctionMarketplace"
-            return await axios.post(chainURLs[network], JSON.stringify({ purchaseToken, maxDuration, options, transactionType }), headers(apiKey))
+            return await axios.post(
+                chainURLs[network],
+                JSON.stringify({ purchaseToken, maxDuration, options, transactionType }),
+                headers(apiKey)
+            )
         }
     },
 
@@ -180,20 +188,23 @@ const IdexoSDK = {
     },
 
     SBTs: {
-        async createSBTCapped(apiKey, network, name, symbol, cap, options) {
+        async createSBTCapped(apiKey, network, name, symbol, baseUri, cap, options) {
             const transactionType = "createSBTCapped"
 
-            let transaction = await axios.post(
+            return await axios.post(
                 chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, cap, options }),
+                JSON.stringify({ transactionType, name, symbol, baseUri, cap, options }),
                 headers(apiKey)
             )
-            return transaction
         },
-        async createSBTUncapped(apiKey, network, name, symbol, options) {
+        async createSBTUncapped(apiKey, network, name, symbol, baseUri, options) {
             const transactionType = "createSBTUncapped"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
+            return await axios.post(
+                chainURLs[network],
+                JSON.stringify({ transactionType, name, symbol, baseUri, options }),
+                headers(apiKey)
+            )
         },
         async createSBTCommunityUncapped(apiKey, network, name, symbol, options) {
             const transactionType = "createSBTCommunityUncapped"
