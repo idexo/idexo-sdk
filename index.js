@@ -46,15 +46,6 @@ const IdexoSDK = {
         async deployAuctionMarketplace(apiKey, network, purchaseToken, maxDuration, options) {
             const transactionType = "deployAuctionMarketplace"
             return await axios.post(chainURLs[network], JSON.stringify({ purchaseToken, maxDuration, options, transactionType }), headers(apiKey))
-        },
-        async addNFTContract(apiKey, network, contractAddress, nftcontract) {
-            const transactionType = "addMarketplaceNFTContract"
-
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ contractAddress, nftcontract, transactionType }),
-                headers(apiKey)
-            )
         }
     },
 
