@@ -39,16 +39,13 @@ const IdexoSDK = {
     },
 
     Marketplace: {
-        async deployMarketplace(apiKey, network, tradingFee, marketType) {
-            if (marketType == "simple") {
-                const transactionType = "deploySimpleMarketplace"
-
-                return await axios.post(chainURLs[network], JSON.stringify({ tradingFee, transactionType }), headers(apiKey))
-            } else if (marketType == "auction") {
-                const transactionType = "deployAuctionMarketplace"
-
-                return await axios.post(chainURLs[network], JSON.stringify({ tradingFee, transactionType }), headers(apiKey))
-            }
+        async deploySimpleMarketplace(apiKey, network, purchaseToken, saleStartTime, options) {
+            const transactionType = "deploySimpleMarketplace"
+            return await axios.post(chainURLs[network], JSON.stringify({ purchaseToken, saleStartTime, options, transactionType }), headers(apiKey))
+        },
+        async deployAuctionMarketplace(apiKey, network, purchaseToken, maxDuration, options) {
+            const transactionType = "deployAuctionMarketplace"
+            return await axios.post(chainURLs[network], JSON.stringify({ purchaseToken, maxDuration, options, transactionType }), headers(apiKey))
         },
         async addNFTContract(apiKey, network, contractAddress, nftcontract) {
             const transactionType = "addMarketplaceNFTContract"
@@ -226,7 +223,7 @@ const IdexoSDK = {
                 headers(apiKey)
             )
             return transaction
-        },
+        }
     },
 
     React: {
@@ -300,16 +297,7 @@ const IdexoSDK = {
 
             return await axios.post(chainURLs[network], JSON.stringify({ uploadType, image, contentType }), headers(apiKey))
         },
-        async uploadNFTMetadata(
-            apiKey,
-            network,
-            image,
-            nftName,
-            nftDescription,
-            attributes,
-            imageIsBase64 = false,
-            contentType
-        ) {
+        async uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, imageIsBase64 = false, contentType) {
             if (!imageIsBase64) {
                 contentType = mime.getType(image)
                 image = await fs.readFile(image, { encoding: "base64" })
