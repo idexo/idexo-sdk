@@ -39,16 +39,16 @@ const IdexoSDK = {
     },
 
     Marketplace: {
-        async deploySimpleMarketplace(apiKey, network, purchaseToken, saleStartTime, options) {
-            const transactionType = "deploySimpleMarketplace"
+        async createSimpleMarketplace(apiKey, network, purchaseToken, saleStartTime, options) {
+            const transactionType = "createSimpleMarketplace"
             return await axios.post(
                 chainURLs[network],
                 JSON.stringify({ purchaseToken, saleStartTime, options, transactionType }),
                 headers(apiKey)
             )
         },
-        async deployAuctionMarketplace(apiKey, network, purchaseToken, maxDuration, options) {
-            const transactionType = "deployAuctionMarketplace"
+        async createAuctionMarketplace(apiKey, network, purchaseToken, maxDuration, options) {
+            const transactionType = "createAuctionMarketplace"
             return await axios.post(
                 chainURLs[network],
                 JSON.stringify({ purchaseToken, maxDuration, options, transactionType }),
@@ -256,14 +256,14 @@ const IdexoSDK = {
     },
 
     Staking: {
-        async deployPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens) {
+        async createPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens) {
             if (multi == "true") {
-                const transactionType = "deployStakingPool"
+                const transactionType = "createStakingPool"
                 const poolType = "multiRewards"
 
                 return await axios.post(chainURLs[network], JSON.stringify({ tokenType, name, symbol }), headers(apiKey))
             } else {
-                const transactionType = "deployStakingPool"
+                const transactionType = "createStakingPool"
                 const poolType = "singleRewards"
             }
         }
@@ -324,8 +324,8 @@ const IdexoSDK = {
     },
 
     Tokens: {
-        async deployTokenCapped(apiKey, network, name, symbol, cap) {
-            const transactionType = "deployToken"
+        async createTokenCapped(apiKey, network, name, symbol, cap) {
+            const transactionType = "createToken"
             const tokenType = "capped"
 
             return await axios.post(
@@ -334,8 +334,8 @@ const IdexoSDK = {
                 headers(apiKey)
             )
         },
-        async deployTokenSimple(apiKey, network, name, symbol) {
-            const transactionType = "deployToken"
+        async createTokenSimple(apiKey, network, name, symbol) {
+            const transactionType = "createToken"
             const tokenType = "simple"
 
             return await axios.post(chainURLs[network], JSON.stringify({ transactionType, tokenType, name, symbol }), headers(apiKey))
@@ -352,8 +352,8 @@ const IdexoSDK = {
     },
 
     Vesting: {
-        async deployVesting(apiKey, network, depositToken, beneficiary, startTime, cliffMonth, durationMonth) {
-            const transactionType = "deployVesting"
+        async createVesting(apiKey, network, depositToken, beneficiary, startTime, cliffMonth, durationMonth) {
+            const transactionType = "createVesting"
 
             return await axios.post(
                 chainURLs[network],

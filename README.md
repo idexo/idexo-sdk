@@ -35,7 +35,7 @@ Methods below are categorized by the general use case.
 
 ### Marketplace
 
-deployMarketplace(apiKey, network, tradingFee, marketType)
+createMarketplace(apiKey, network, tradingFee, marketType)
 
 addNFTContract(apiKey, network, contractAddress, nftcontract)
 
@@ -77,9 +77,9 @@ mintNFTWithImage(apiKey, network, contractAddress, addressToMintTo, image, nftNa
 
 ### Project Tokens
 
-deployTokenCapped(apiKey, network, name, symbol, cap)
+createTokenCapped(apiKey, network, name, symbol, cap)
 
-deployTokenSimple(apiKey, network, name, symbol)
+createTokenSimple(apiKey, network, name, symbol)
 
 mintToken(apiKey, network, contractAddress, mintToAddress, amount)
 
@@ -102,11 +102,11 @@ uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, [
 
 ### Staking
 
-deployPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens)
+createPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens)
 
 ### Vesting
 
-deployVesting(apiKey, network, depositToken, beneficiary, startTime, cliffMonth, durationMonth)
+createVesting(apiKey, network, depositToken, beneficiary, startTime, cliffMonth, durationMonth)
 
 depositInitial(apiKey, network, contractAddress, amount)
 
