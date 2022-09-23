@@ -206,11 +206,12 @@ const IdexoSDK = {
                 headers(apiKey)
             )
         },
-        async createSBTCommunityUncapped(apiKey, network, name, symbol, options) {
-            const transactionType = "createSBTCommunityUncapped"
+        // TODO: add abi and methods
+        // async createSBTCommunityUncapped(apiKey, network, name, symbol, options) {
+        //     const transactionType = "createSBTCommunityUncapped"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
-        },
+        //     return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
+        // },
         async mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintSBT"
 
@@ -254,21 +255,6 @@ const IdexoSDK = {
             )
         }
     },
-
-    Staking: {
-        async createPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens) {
-            if (multi == "true") {
-                const transactionType = "createStakingPool"
-                const poolType = "multiRewards"
-
-                return await axios.post(chainURLs[network], JSON.stringify({ tokenType, name, symbol }), headers(apiKey))
-            } else {
-                const transactionType = "createStakingPool"
-                const poolType = "singleRewards"
-            }
-        }
-    },
-
     Storage: {
         async uploadPlain(apiKey, network, data) {
             const uploadType = "plainText"
@@ -324,22 +310,23 @@ const IdexoSDK = {
     },
 
     Tokens: {
-        async createTokenCapped(apiKey, network, name, symbol, cap) {
+        async createTokenCapped(apiKey, network, name, symbol, cap, options) {
             const transactionType = "createToken"
             const tokenType = "capped"
 
             return await axios.post(
                 chainURLs[network],
-                JSON.stringify({ transactionType, tokenType, cap, name, symbol }),
+                JSON.stringify({ transactionType, tokenType, cap, name, symbol, options }),
                 headers(apiKey)
             )
         },
-        async createTokenSimple(apiKey, network, name, symbol) {
-            const transactionType = "createToken"
-            const tokenType = "simple"
+        // TODO: add abi
+        // async createTokenUncapped(apiKey, network, name, symbol) {
+        //     const transactionType = "createToken"
+        //     const tokenType = "uncapped"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, tokenType, name, symbol }), headers(apiKey))
-        },
+        //     return await axios.post(chainURLs[network], JSON.stringify({ transactionType, tokenType, name, symbol }), headers(apiKey))
+        // },
         async mintToken(apiKey, network, contractAddress, mintToAddress, amount) {
             const transactionType = "mintToken"
 
@@ -352,12 +339,21 @@ const IdexoSDK = {
     },
 
     Vesting: {
-        async createVesting(apiKey, network, depositToken, beneficiary, startTime, cliffMonth, durationMonth) {
+        async createVesting(apiKey, network, depositToken, beneficiary, startTime, cliffDays, durationDays, claimsPeriod, options) {
             const transactionType = "createVesting"
 
             return await axios.post(
                 chainURLs[network],
-                JSON.stringify({ depositToken, beneficiary, startTime, cliffMonth, durationMonth, transactionType }),
+                JSON.stringify({
+                    depositToken,
+                    beneficiary,
+                    startTime,
+                    cliffDays,
+                    durationDays,
+                    claimsPeriod,
+                    options,
+                    transactionType
+                }),
                 headers(apiKey)
             )
         },
@@ -365,6 +361,16 @@ const IdexoSDK = {
             const transactionType = "depositInitial"
 
             return await axios.post(chainURLs[network], JSON.stringify({ contractAddress, amount, transactionType }), headers(apiKey))
+        },
+        async getVestedAmount(apiKey, network, contractAddress) {
+            const transactionType = "getVestedAmount"
+
+            return await axios.post(chainURLs[network], JSON.stringify({ contractAddress, transactionType }), headers(apiKey))
+        },
+        async getAvailableClaimAmount(apiKey, network, contractAddress) {
+            const transactionType = "getAvailableClaimAmount"
+
+            return await axios.post(chainURLs[network], JSON.stringify({ contractAddress, transactionType }), headers(apiKey))
         }
     },
 
