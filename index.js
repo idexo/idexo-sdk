@@ -255,9 +255,6 @@ const IdexoSDK = {
             )
         }
     },
-
-
-
     Storage: {
         async uploadPlain(apiKey, network, data) {
             const uploadType = "plainText"
