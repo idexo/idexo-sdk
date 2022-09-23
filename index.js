@@ -256,20 +256,7 @@ const IdexoSDK = {
         }
     },
 
-    // TODO: move to idexocom-sdk
-    // Staking: {
-    //     async createPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens) {
-    //         if (multi == "true") {
-    //             const transactionType = "createStakingPool"
-    //             const poolType = "multiRewards"
 
-    //             return await axios.post(chainURLs[network], JSON.stringify({ tokenType, name, symbol }), headers(apiKey))
-    //         } else {
-    //             const transactionType = "createStakingPool"
-    //             const poolType = "singleRewards"
-    //         }
-    //     }
-    // },
 
     Storage: {
         async uploadPlain(apiKey, network, data) {
