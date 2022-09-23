@@ -35,14 +35,14 @@ Methods below are categorized by the general use case.
 
 ### Marketplace
 
-createMarketplace(apiKey, network, tradingFee, marketType)
+createSimpleMarketplace(apiKey, network, purchaseToken, saleStartTime, options)
 
-addNFTContract(apiKey, network, contractAddress, nftcontract)
+createAuctionMarketplace(apiKey, network, purchaseToken, maxDuration, options)
 
 
 ### NFT
 
-createCollectionCapped(apiKey, network, name, symbol, cap)
+createCollectionCapped(apiKey, network, name, symbol, cap, options)
 
 createCollectionUncapped(apiKey, network, name, symbol)
 
@@ -52,15 +52,26 @@ createUncappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP
 
 mintNFT(apiKey, network, contractAddress, addressToMintTo, tokenUri)
 
+mintRoyaltyNFT(apiKey, network, contractAddress, mintToAddress, tokenUri)
+
 mintNFTBatch(apiKey, network, contractAddress, [recipients], [tokenURIs])
 
 setTokenURI(apiKey, network, contractAddress, tokenId, tokenUri)
 
 getTokenURI(apiKey, network, contractAddress, tokenId)
 
-getCollectionIds(apiKey, network, contractAddress, walletAddress)
+getCollectionIds(apiKey, network, contractAddress, walletAddress, withURI = false)
 
 getBalanceOf(apiKey, network, contractAddress, walletAddress)
+
+
+### SBT
+
+createSBTCapped(apiKey, network, name, symbol, baseUri, cap, options)
+
+createSBTUncapped(apiKey, network, name, symbol, baseUri, options)
+
+mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri)
 
 
 ### Multi
@@ -74,12 +85,11 @@ mintNFTWithImage(apiKey, network, contractAddress, addressToMintTo, image, nftNa
 | [contentType]  | string    | optional if image is image path. Ex. "image/jpeg" |
 
 
+### Tokens
 
-### Project Tokens
+createTokenCapped(apiKey, network, name, symbol, cap, options)
 
-createTokenCapped(apiKey, network, name, symbol, cap)
-
-createTokenSimple(apiKey, network, name, symbol)
+createTokenUncapped(apiKey, network, name, symbol)
 
 mintToken(apiKey, network, contractAddress, mintToAddress, amount)
 
@@ -100,15 +110,17 @@ uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, [
 | [imageIsBase64]| bool      | Default = false. optional if image is image path  |
 | [contentType]  | string    | optional if image is image path. Ex. "image/jpeg" |
 
-### Staking
-
-createPool(apiKey, network, name, symbol, baseUri, multi, depositTokens, rewardTokens)
 
 ### Vesting
 
-createVesting(apiKey, network, depositToken, beneficiary, startTime, cliffMonth, durationMonth)
+createVesting(apiKey, network, depositToken, beneficiary, startTime, cliffDays, durationDays, claimsPeriod, options)
 
 depositInitial(apiKey, network, contractAddress, amount)
+
+getVestedAmount(apiKey, network, contractAddress)
+
+getAvailableClaimAmount(apiKey, network, contractAddress)
+
 
 ### Utils
 
@@ -117,6 +129,8 @@ getContractAddress(apiKey, network, transactionHash)
 getTransactions(apiKey, network, timestampFrom, timestampTo)
 
 getTransactionsByGroup(apiKey, network, group, timestampFrom, timestampTo)
+
+getTransactionsByFunction(apiKey, function_name)
 
 ## Available Networks
 
