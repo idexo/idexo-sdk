@@ -311,21 +311,19 @@ const IdexoSDK = {
 
     Tokens: {
         async createTokenCapped(apiKey, network, name, symbol, cap, options) {
-            const transactionType = "createToken"
-            const tokenType = "capped"
+            const transactionType = "createTokenCapped"
 
             return await axios.post(
                 chainURLs[network],
-                JSON.stringify({ transactionType, tokenType, cap, name, symbol, options }),
+                JSON.stringify({ transactionType, cap, name, symbol, options }),
                 headers(apiKey)
             )
         },
         // TODO: add abi
-        // async createTokenUncapped(apiKey, network, name, symbol) {
-        //     const transactionType = "createToken"
-        //     const tokenType = "uncapped"
+        // async createTokenUncapped(apiKey, network, name, symbol, options) {
+        //     const transactionType = "createTokenUncapped"
 
-        //     return await axios.post(chainURLs[network], JSON.stringify({ transactionType, tokenType, name, symbol }), headers(apiKey))
+        //     return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
         // },
         async mintToken(apiKey, network, contractAddress, mintToAddress, amount) {
             const transactionType = "mintToken"
