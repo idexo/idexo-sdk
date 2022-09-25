@@ -62,7 +62,7 @@ const IdexoSDK = {
             apiKey,
             network,
             contractAddress,
-            addressToMintTo,
+            mintToAddress,
             image,
             nftName,
             nftDescription,
@@ -80,7 +80,7 @@ const IdexoSDK = {
                 chainURLs[network],
                 JSON.stringify({
                     contractAddress,
-                    addressToMintTo,
+                    mintToAddress,
                     image,
                     contentType,
                     nftName,
@@ -235,14 +235,14 @@ const IdexoSDK = {
 
             return await axios.post(reactPostUrl, JSON.stringify({ name, symbol, transactionType, network }), headers(apiKey))
         },
-        async mintNFT(apiKey, contractAddress, network, addressToMintTo, image, contentType, nftName, nftDescription, attributes) {
+        async mintNFT(apiKey, contractAddress, network, mintToAddress, image, contentType, nftName, nftDescription, attributes) {
             const transactionType = "mintNFT"
 
             return await axios.post(
                 reactPostUrl,
                 JSON.stringify({
                     contractAddress,
-                    addressToMintTo,
+                    mintToAddress,
                     image,
                     contentType,
                     nftName,
@@ -296,7 +296,7 @@ const IdexoSDK = {
                 chainURLs[network],
                 JSON.stringify({
                     contractAddress,
-                    addressToMintTo,
+                    mintToAddress,
                     image,
                     contentType,
                     nftName,

@@ -50,7 +50,7 @@ createCappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, 
 
 createUncappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, options)
 
-mintNFT(apiKey, network, contractAddress, addressToMintTo, tokenUri)
+mintNFT(apiKey, network, contractAddress, mintToAddress, tokenUri)
 
 mintRoyaltyNFT(apiKey, network, contractAddress, mintToAddress, tokenUri)
 
@@ -77,7 +77,7 @@ mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri)
 ### Multi
 
 
-mintNFTWithImage(apiKey, network, contractAddress, addressToMintTo, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType])
+mintNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType])
 | Parameter      | Datatype  | Description                                       |
 | -------------- |:---------:| -------------------------------------------------:|
 | image          | string    | image path OR base64 encoded image                |
