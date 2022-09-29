@@ -355,11 +355,6 @@ const IdexoSDK = {
                 headers(apiKey)
             )
         },
-        async depositInitial(apiKey, network, contractAddress, amount) {
-            const transactionType = "depositInitial"
-
-            return await axios.post(chainURLs[network], JSON.stringify({ contractAddress, amount, transactionType }), headers(apiKey))
-        },
         async getVestedAmount(apiKey, network, contractAddress) {
             const transactionType = "getVestedAmount"
 
