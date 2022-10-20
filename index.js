@@ -1,7 +1,6 @@
 const axios = require("axios")
 const fs = require("fs").promises
 const mime = require("mime")
-const reactPostUrl = "https://react.idexo.io"
 const utilsUrl = "https://transactions.idexo.io"
 
 const chainURLs = {
@@ -25,35 +24,38 @@ function headers(apiKey) {
     }
 }
 
+async function sendRequest(apiKey, network, data) {
+    return await axios
+    .post(
+        chainURLs[network],
+        JSON.stringify(data),
+        headers(apiKey)
+        )
+        .catch(function (error) {
+        if (error.response) {
+            return error.response
+        } else {
+            return error
+        }
+    })
+}
+
 const IdexoSDK = {
     Common: {
         async transferOwnership(apiKey, network, contractAddress, newOwnerAddress) {
             const transactionType = "transferOwnership"
-
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ contractAddress, newOwnerAddress, transactionType }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { contractAddress, newOwnerAddress, transactionType })
         }
     },
 
     Marketplace: {
         async createSimpleMarketplace(apiKey, network, purchaseToken, saleStartTime, options) {
             const transactionType = "createSimpleMarketplace"
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ purchaseToken, saleStartTime, options, transactionType }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { purchaseToken, saleStartTime, options, transactionType })
         },
         async createAuctionMarketplace(apiKey, network, purchaseToken, maxDuration, options) {
             const transactionType = "createAuctionMarketplace"
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ purchaseToken, maxDuration, options, transactionType }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { purchaseToken, maxDuration, options, transactionType })
         }
     },
 
@@ -76,20 +78,17 @@ const IdexoSDK = {
             }
 
             const transactionType = "mintNFTWithImage"
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({
-                    contractAddress,
-                    mintToAddress,
-                    image,
-                    contentType,
-                    nftName,
-                    nftDescription,
-                    attributes,
-                    transactionType
-                }),
-                headers(apiKey)
-            )
+
+            return await sendRequest(apiKey, network, {
+                contractAddress,
+                mintToAddress,
+                image,
+                contentType,
+                nftName,
+                nftDescription,
+                attributes,
+                transactionType
+            })
         }
     },
 
@@ -97,93 +96,57 @@ const IdexoSDK = {
         async createCollectionCapped(apiKey, network, name, symbol, cap, options) {
             const transactionType = "createCollectionCapped"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, cap, options }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, name, symbol, cap, options })
         },
         async createCollectionUncapped(apiKey, network, name, symbol, options) {
             const transactionType = "createCollectionUncapped"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ transactionType, name, symbol, options }), headers(apiKey))
+            return await sendRequest(apiKey, network, { transactionType, name, symbol, options })
         },
         async createCappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, cap, options) {
             const transactionType = "createCappedRoyalty"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, royaltyCollector, royaltyBP, cap, options }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, name, symbol, royaltyCollector, royaltyBP, cap, options })
         },
         async createUncappedRoyalty(apiKey, network, name, symbol, royaltyCollector, royaltyBP, options) {
             const transactionType = "createUncappedRoyalty"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, royaltyCollector, royaltyBP, options }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, name, symbol, royaltyCollector, royaltyBP, options })
         },
         async mintNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintNFT"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, contractAddress, mintToAddress, tokenUri }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, contractAddress, mintToAddress, tokenUri })
         },
         async mintRoyaltyNFT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintRoyaltyNFT"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, contractAddress, mintToAddress, tokenUri }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, contractAddress, mintToAddress, tokenUri })
         },
         async mintNFTBatch(apiKey, network, contractAddress, recipients, tokenUris) {
             const transactionType = "mintNFTBatch"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, contractAddress, recipients, tokenUris }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, contractAddress, recipients, tokenUris })
         },
         async setTokenURI(apiKey, network, contractAddress, tokenId, tokenUri) {
             const transactionType = "setTokenURI"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ contractAddress, tokenId, tokenUri, transactionType }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { contractAddress, tokenId, tokenUri, transactionType })
         },
         async getTokenURI(apiKey, network, contractAddress, tokenId) {
             const transactionType = "getTokenURI"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ contractAddress, tokenId, transactionType }), headers(apiKey))
+            return await sendRequest(apiKey, network, { contractAddress, tokenId, transactionType })
         },
         async getCollectionIds(apiKey, network, contractAddress, walletAddress, withURI = false) {
             const transactionType = "getCollectionIds"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ contractAddress, walletAddress, withURI, transactionType }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { contractAddress, walletAddress, withURI, transactionType })
         },
         async getBalanceOf(apiKey, network, contractAddress, walletAddress) {
             const transactionType = "getBalanceOf"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ contractAddress, walletAddress, transactionType }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { contractAddress, walletAddress, transactionType })
         }
     },
 
@@ -191,20 +154,12 @@ const IdexoSDK = {
         async createSBTCapped(apiKey, network, name, symbol, baseUri, cap, options) {
             const transactionType = "createSBTCapped"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, baseUri, cap, options }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, name, symbol, baseUri, cap, options })
         },
         async createSBTUncapped(apiKey, network, name, symbol, baseUri, options) {
             const transactionType = "createSBTUncapped"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, name, symbol, baseUri, options }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, name, symbol, baseUri, options })
         },
         // TODO: add abi and methods
         // async createSBTCommunityUncapped(apiKey, network, name, symbol, options) {
@@ -215,67 +170,36 @@ const IdexoSDK = {
         async mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri) {
             const transactionType = "mintSBT"
 
-            let transaction = await axios.post(
-                chainURLs[network],
-                JSON.stringify({
-                    transactionType: transactionType,
-                    contractAddress: contractAddress,
-                    mintToAddress: mintToAddress,
-                    tokenUri: tokenUri
-                }),
-                headers(apiKey)
-            )
-            return transaction
+            return await sendRequest(apiKey, network, {
+                transactionType,
+                contractAddress,
+                mintToAddress,
+                tokenUri
+            })
         }
     },
-
-    React: {
-        async createCollection(apiKey, network, name, symbol) {
-            const transactionType = "createCollection"
-
-            return await axios.post(reactPostUrl, JSON.stringify({ name, symbol, transactionType, network }), headers(apiKey))
-        },
-        async mintNFT(apiKey, contractAddress, network, mintToAddress, image, contentType, nftName, nftDescription, attributes) {
-            const transactionType = "mintNFT"
-
-            return await axios.post(
-                reactPostUrl,
-                JSON.stringify({
-                    contractAddress,
-                    mintToAddress,
-                    image,
-                    contentType,
-                    nftName,
-                    nftDescription,
-                    attributes,
-                    transactionType,
-                    network
-                }),
-                headers(apiKey)
-            )
-        }
-    },
+    
     Storage: {
         async uploadPlain(apiKey, network, data) {
             const uploadType = "plainText"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ uploadType, data, encoding: "null" }), headers(apiKey))
+            return await sendRequest(apiKey, network, { uploadType, data, encoding: "null" })
         },
         async uploadHTML(apiKey, network, data) {
             const uploadType = "HTML"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ uploadType, data, encoding: "null" }), headers(apiKey))
+            return await sendRequest(apiKey, network, { uploadType, data, encoding: "null" })
         },
         async uploadJSON(apiKey, network, data) {
             const uploadType = "JSON"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ uploadType, data, encoding: "null" }), headers(apiKey))
+            return await sendRequest(apiKey, network, { uploadType, data, encoding: "null" })
         },
         async uploadBuffer(apiKey, network, data, encoding) {
             //data must be string (should enforce that with type)
             const uploadType = "buffer"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ uploadType, data, encoding }), headers(apiKey))
+            return await sendRequest(apiKey, network, { uploadType, data, encoding })
         },
         async uploadImage(apiKey, network, imagePath) {
             //data must be string (should enforce that with type)
@@ -283,7 +207,7 @@ const IdexoSDK = {
             const contentType = mime.getType(imagePath)
             const image = await fs.readFile(imagePath, { encoding: "base64" })
 
-            return await axios.post(chainURLs[network], JSON.stringify({ uploadType, image, contentType }), headers(apiKey))
+            return await sendRequest(apiKey, network, { uploadType, image, contentType })
         },
         async uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, imageIsBase64 = false, contentType) {
             if (!imageIsBase64) {
@@ -292,20 +216,17 @@ const IdexoSDK = {
             }
 
             const uploadType = "NFTMetadata"
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({
-                    contractAddress,
-                    mintToAddress,
-                    image,
-                    contentType,
-                    nftName,
-                    nftDescription,
-                    attributes,
-                    uploadType
-                }),
-                headers(apiKey)
-            )
+
+            return await sendRequest(apiKey, network, {
+                contractAddress,
+                mintToAddress,
+                image,
+                contentType,
+                nftName,
+                nftDescription,
+                attributes,
+                uploadType
+            })
         }
     },
 
@@ -313,11 +234,7 @@ const IdexoSDK = {
         async createTokenCapped(apiKey, network, name, symbol, cap, options) {
             const transactionType = "createTokenCapped"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, cap, name, symbol, options }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, cap, name, symbol, options })
         },
         // TODO: add abi
         // async createTokenUncapped(apiKey, network, name, symbol, options) {
@@ -328,11 +245,7 @@ const IdexoSDK = {
         async mintToken(apiKey, network, contractAddress, mintToAddress, amount) {
             const transactionType = "mintToken"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({ transactionType, contractAddress, mintToAddress, amount }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, { transactionType, contractAddress, mintToAddress, amount })
         }
     },
 
@@ -340,30 +253,26 @@ const IdexoSDK = {
         async createVesting(apiKey, network, depositToken, beneficiary, startTime, cliffDays, durationDays, claimsPeriod, options) {
             const transactionType = "createVesting"
 
-            return await axios.post(
-                chainURLs[network],
-                JSON.stringify({
-                    depositToken,
-                    beneficiary,
-                    startTime,
-                    cliffDays,
-                    durationDays,
-                    claimsPeriod,
-                    options,
-                    transactionType
-                }),
-                headers(apiKey)
-            )
+            return await sendRequest(apiKey, network, {
+                depositToken,
+                beneficiary,
+                startTime,
+                cliffDays,
+                durationDays,
+                claimsPeriod,
+                options,
+                transactionType
+            })
         },
         async getVestedAmount(apiKey, network, contractAddress) {
             const transactionType = "getVestedAmount"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ contractAddress, transactionType }), headers(apiKey))
+            return await sendRequest(apiKey, network, { contractAddress, transactionType })
         },
         async getAvailableClaimAmount(apiKey, network, contractAddress) {
             const transactionType = "getAvailableClaimAmount"
 
-            return await axios.post(chainURLs[network], JSON.stringify({ contractAddress, transactionType }), headers(apiKey))
+            return await sendRequest(apiKey, network, { contractAddress, transactionType })
         }
     },
 
