@@ -1,7 +1,6 @@
 const axios = require("axios")
 const fs = require("fs").promises
 const mime = require("mime")
-const reactPostUrl = "https://react.idexo.io"
 const utilsUrl = "https://transactions.idexo.io"
 
 const chainURLs = {
@@ -179,28 +178,7 @@ const IdexoSDK = {
             })
         }
     },
-
-    React: {
-        async createCollection(apiKey, network, name, symbol) {
-            const transactionType = "createCollection"
-
-            return await sendRequest(apiKey, network, { transactionType, name, symbol })
-        },
-        async mintNFT(apiKey, contractAddress, network, mintToAddress, image, contentType, nftName, nftDescription, attributes) {
-            const transactionType = "mintNFT"
-
-            return await sendRequest(apiKey, network, {
-                contractAddress,
-                mintToAddress,
-                image,
-                contentType,
-                nftName,
-                nftDescription,
-                attributes,
-                transactionType
-            })
-        }
-    },
+    
     Storage: {
         async uploadPlain(apiKey, network, data) {
             const uploadType = "plainText"
