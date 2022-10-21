@@ -4,6 +4,7 @@ const mime = require("mime")
 const utilsUrl = "https://transactions.idexo.io"
 
 const chainURLs = {
+    arbitrum: "https://arbitrum.idexo.io",
     arweave: "https://ziparweave.idexo.io",
     avalanche: "https://avalanche.idexo.io",
     bnbchain: "https://mainnetbsc.idexo.io",
@@ -11,6 +12,7 @@ const chainURLs = {
     ethereum: "https://mainneteth.idexo.io",
     fantom: "https://fantom.idexo.io",
     filecoin: "https://filecoin.idexo.io",
+    okc: "https://okc.idexo.io",
     polygon: "https://polygon.idexo.io",
     solana: "https://solana.idexo.io"
 }
