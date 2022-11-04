@@ -27,13 +27,7 @@ function headers(apiKey) {
 }
 
 async function sendRequest(apiKey, network, data) {
-    return await axios
-    .post(
-        chainURLs[network],
-        JSON.stringify(data),
-        headers(apiKey)
-        )
-        .catch(function (error) {
+    return await axios.post(chainURLs[network], JSON.stringify(data), headers(apiKey)).catch(function (error) {
         if (error.response) {
             return error.response
         } else {
@@ -72,7 +66,8 @@ const IdexoSDK = {
             nftDescription,
             attributes,
             imageIsBase64 = false,
-            contentType
+            contentType,
+            options
         ) {
             if (!imageIsBase64) {
                 contentType = mime.getType(image)
@@ -89,7 +84,8 @@ const IdexoSDK = {
                 nftName,
                 nftDescription,
                 attributes,
-                transactionType
+                transactionType,
+                options
             })
         }
     },
@@ -180,7 +176,7 @@ const IdexoSDK = {
             })
         }
     },
-    
+
     Storage: {
         async uploadPlain(apiKey, network, data) {
             const uploadType = "plainText"
@@ -211,7 +207,7 @@ const IdexoSDK = {
 
             return await sendRequest(apiKey, network, { uploadType, image, contentType })
         },
-        async uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, imageIsBase64 = false, contentType) {
+        async uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, imageIsBase64 = false, contentType, options) {
             if (!imageIsBase64) {
                 contentType = mime.getType(image)
                 image = await fs.readFile(image, { encoding: "base64" })
@@ -227,7 +223,8 @@ const IdexoSDK = {
                 nftName,
                 nftDescription,
                 attributes,
-                uploadType
+                uploadType,
+                options
             })
         }
     },
