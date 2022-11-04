@@ -77,12 +77,13 @@ mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri)
 ### Multi
 
 
-mintNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType])
-| Parameter      | Datatype  | Description                                       |
-| -------------- |:---------:| -------------------------------------------------:|
-| image          | string    | image path OR base64 encoded image                |
-| [imageIsBase64]| bool      | Default = false. optional if image is image path  |
-| [contentType]  | string    | optional if image is image path. Ex. "image/jpeg" |
+mintNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType], [options])
+| Parameter      | Datatype  | Description                                                                                   |
+| -------------- |:---------:| ---------------------------------------------------------------------------------------------:|
+| image          | string    | image path OR base64 encoded image                                                            |
+| [imageIsBase64]| bool      | Default = false. optional if image is image path                                              |
+| [contentType]  | string    | optional if image is image path. Ex. "image/jpeg"                                             |
+| [options]      | object    | optional. set metadata storage option (default "arweave"). ex. { metadataStorage: "filecoin" }|
 
 
 ### Tokens
@@ -103,12 +104,13 @@ uploadBuffer(apiKey, network, data, encoding)
 
 uploadImage(apiKey, network, imagePath)
 
-uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType])
-| Parameter      | Datatype  | Description                                       |
-| -------------- |:---------:| -------------------------------------------------:|
-| image          | string    | image path OR base64 encoded image                |
-| [imageIsBase64]| bool      | Default = false. optional if image is image path  |
-| [contentType]  | string    | optional if image is image path. Ex. "image/jpeg" |
+uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType], [options])
+| Parameter      | Datatype  | Description                                                                                   |
+| -------------- |:---------:| ---------------------------------------------------------------------------------------------:|
+| image          | string    | image path OR base64 encoded image                                                            |
+| [imageIsBase64]| bool      | Default = false. optional if image is image path                                              |
+| [contentType]  | string    | optional if image is image path. Ex. "image/jpeg"                                             |
+| [options]      | object    | optional. set metadata storage option (default "arweave"). ex. { metadataStorage: "filecoin" }|
 
 
 ### Vesting
