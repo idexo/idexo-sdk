@@ -1,7 +1,6 @@
 const axios = require("axios")
 const fs = require("fs").promises
 const mime = require("mime")
-const utilsUrl = "https://transactions.idexo.io"
 
 const chainURLs = {
     arbitrum: "https://arbitrum.idexo.io",
@@ -14,20 +13,26 @@ const chainURLs = {
     filecoin: "https://filecoin.idexo.io",
     okc: "https://okc.idexo.io",
     polygon: "https://polygon.idexo.io",
-    solana: "https://solana.idexo.io"
+    solana: "https://solana.idexo.io",
+    utilsUrl: "https://transactions.idexo.io"
 }
 
 function headers(apiKey) {
     return {
-        headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey
-        }
+        "Content-Type": "application/json",
+        "x-api-key": apiKey
     }
 }
 
-async function sendRequest(apiKey, network, data) {
-    return await axios.post(chainURLs[network], JSON.stringify(data), headers(apiKey)).catch(function (error) {
+async function sendRequest(apiKey, network, data, method = "post", params = null) {
+    let config = {
+        method: method,
+        url: chainURLs[network],
+        headers: headers(apiKey)
+    }
+    if (data) config.data = JSON.stringify(data)
+    if (params) config.params = params
+    return await axios.request(config).catch(function (error) {
         if (error.response) {
             return error.response
         } else {
@@ -277,24 +282,20 @@ const IdexoSDK = {
 
     Utils: {
         async getContractAddress(apiKey, network, transactionHash) {
-            let request = headers(apiKey)
-            request.params = { path: "contract", network, hash: transactionHash }
-            return await axios.get(utilsUrl, request)
+            let params = { path: "contract", network, hash: transactionHash }
+            return await sendRequest(apiKey, "utilsUrl", null, "get", params)
         },
         async getTransactions(apiKey, network, timestampFrom, timestampTo) {
-            let request = headers(apiKey)
-            request.params = { path: "transactions", network, from: timestampFrom, to: timestampTo }
-            return await axios.get(utilsUrl, request)
+            let params = { path: "transactions", network, from: timestampFrom, to: timestampTo }
+            return await sendRequest(apiKey, "utilsUrl", null, "get", params)
         },
         async getTransactionsByGroup(apiKey, network, group, timestampFrom, timestampTo) {
-            let request = headers(apiKey)
-            request.params = { path: "transactions", network, group, from: timestampFrom, to: timestampTo }
-            return await axios.get(utilsUrl, request)
+            let params = { path: "transactions", network, group, from: timestampFrom, to: timestampTo }
+            return await sendRequest(apiKey, "utilsUrl", null, "get", params)
         },
         async getTransactionsByFunction(apiKey, function_name) {
-            let request = headers(apiKey)
-            request.params = { path: "functions", function_name }
-            return await axios.get(utilsUrl, request)
+            let params = { path: "functions", function_name }
+            return await sendRequest(apiKey, "utilsUrl", null, "get", params)
         }
     }
 }
