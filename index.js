@@ -216,8 +216,6 @@ const IdexoSDK = {
             const uploadType = "NFTMetadata"
 
             return await sendRequest(apiKey, network, {
-                contractAddress,
-                mintToAddress,
                 image,
                 contentType,
                 nftName,
