@@ -181,6 +181,14 @@ const IdexoSDK = {
             })
         }
     },
+    Staking: {
+        async createStakePoolMultiple(apiKey, network, poolName, symbol, baseUri, depositToken, rewardToken, options) {
+            const transactionType = "createStakePoolMultipleRewards"
+
+            return await sendRequest(apiKey, network, { transactionType, poolName, symbol, baseUri, depositToken, rewardToken, options })
+        },
+        
+    },
 
     Storage: {
         async uploadPlain(apiKey, network, data) {
