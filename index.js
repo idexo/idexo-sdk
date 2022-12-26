@@ -61,19 +61,7 @@ const IdexoSDK = {
     },
 
     Multi: {
-        async mintNFTWithImage(
-            apiKey,
-            network,
-            contractAddress,
-            mintToAddress,
-            image,
-            nftName,
-            nftDescription,
-            attributes,
-            imageIsBase64 = false,
-            contentType,
-            options
-        ) {
+        async mintNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, options) {
             if (!imageIsBase64) {
                 contentType = mime.getType(image)
                 image = await fs.readFile(image, { encoding: "base64" })
@@ -185,9 +173,16 @@ const IdexoSDK = {
         async createStakePoolMultiple(apiKey, network, poolName, symbol, baseUri, depositToken, rewardToken, options) {
             const transactionType = "createStakePoolMultipleRewards"
 
-            return await sendRequest(apiKey, network, { transactionType, poolName, symbol, baseUri, depositToken, rewardToken, options })
-        },
-        
+            return await sendRequest(apiKey, network, {
+                transactionType,
+                poolName,
+                symbol,
+                baseUri,
+                depositToken,
+                rewardToken,
+                options
+            })
+        }
     },
 
     Storage: {
@@ -220,7 +215,17 @@ const IdexoSDK = {
 
             return await sendRequest(apiKey, network, { uploadType, image, contentType })
         },
-        async uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, imageIsBase64 = false, contentType, options) {
+        async uploadNFTMetadata(
+            apiKey,
+            network,
+            image,
+            nftName,
+            nftDescription,
+            attributes,
+            imageIsBase64 = false,
+            contentType,
+            options
+        ) {
             if (!imageIsBase64) {
                 contentType = mime.getType(image)
                 image = await fs.readFile(image, { encoding: "base64" })
