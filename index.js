@@ -87,11 +87,15 @@ const IdexoSDK = {
     },
 
     Multi: {
+        // image (string) can be 1) path to file, 2) url, or 3) base64 string
         async mintNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, options) {
-            if (!imageIsBase64) {
+            // if image is string path to file
+            if (!isStringURL(image) && !isBase64String(image)) {
                 contentType = mime.getType(image)
                 image = await fs.readFile(image, { encoding: "base64" })
             }
+
+            if (isBase64String(image)) contentType = detectMimeType(image)
 
             const transactionType = "mintNFTWithImage"
 
