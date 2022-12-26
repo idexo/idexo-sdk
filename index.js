@@ -41,6 +41,32 @@ async function sendRequest(apiKey, network, data, method = "post", params = null
     })
 }
 
+function isBase64String(str) {
+    return str.length % 4 == 0 && /^[A-Za-z0-9+/]+[=]{0,2}$/.test(str)
+}
+
+function isStringURL(str) {
+    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+    return regexp.test(str)
+}
+
+function detectMimeType(b64) {
+    for (var s in base64Signatures) {
+        if (b64.indexOf(s) === 0) {
+            return base64Signatures[s]
+        }
+    }
+}
+
+const base64Signatures = {
+    JVBERi0: "application/pdf",
+    R0lGODdh: "image/gif",
+    R0lGODlh: "image/gif",
+    iVBORw0KGgo: "image/png",
+    "/9j/": "image/jpg",
+    U: "image/webp"
+}
+
 const IdexoSDK = {
     Common: {
         async transferOwnership(apiKey, network, contractAddress, newOwnerAddress) {
