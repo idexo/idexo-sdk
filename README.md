@@ -77,12 +77,11 @@ mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri)
 ### Multi
 
 
-mintNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType], [options])
+mintNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, [options])
 | Parameter      | Datatype  | Description                                                                                   |
 | -------------- |:---------:| ---------------------------------------------------------------------------------------------:|
-| image          | string    | image path OR base64 encoded image                                                            |
-| [imageIsBase64]| bool      | Default = false. optional if image is image path                                              |
-| [contentType]  | string    | optional if image is image path. Ex. "image/jpeg"                                             |
+| image          | string    | 1) image file path, 2) URL, OR, 3) base64 string                                              |
+| attributes     | json      | must be an array. Example: [ { "trait_type": "color", "value": "blue" } ]                     |
 | [options]      | object    | optional. set metadata storage option (default "arweave"). ex. { metadataStorage: "filecoin" }|
 
 
@@ -104,12 +103,11 @@ uploadBuffer(apiKey, network, data, encoding)
 
 uploadImage(apiKey, network, imagePath)
 
-uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, [imageIsBase64], [contentType], [options])
+uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, [options])
 | Parameter      | Datatype  | Description                                                                                   |
 | -------------- |:---------:| ---------------------------------------------------------------------------------------------:|
-| image          | string    | image path OR base64 encoded image                                                            |
-| [imageIsBase64]| bool      | Default = false. optional if image is image path                                              |
-| [contentType]  | string    | optional if image is image path. Ex. "image/jpeg"                                             |
+| image          | string    | 1) image file path, 2) URL, OR, 3) base64 string                                              |
+| attributes     | json      | must be an array. Example: [ { "trait_type": "color", "value": "blue" } ]                     |
 | [options]      | object    | optional. set metadata storage option (default "arweave"). ex. { metadataStorage: "filecoin" }|
 
 
