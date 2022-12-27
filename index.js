@@ -96,8 +96,8 @@ const IdexoSDK = {
                 contentType = mime.getType(image)
                 image = await fs.readFile(image, { encoding: "base64" })
             }
-
             if (isBase64String(image)) contentType = detectMimeType(image)
+            if (contentType === undefined && !isStringURL(image)) throw "unsupported file type! image must be jpg, png, gif, webp, or pdf"
 
             const transactionType = "mintNFTWithImage"
 
@@ -258,6 +258,7 @@ const IdexoSDK = {
                 image = await fs.readFile(image, { encoding: "base64" })
             }
             if (isBase64String(image)) contentType = detectMimeType(image)
+            if (contentType === undefined && !isStringURL(image)) throw "unsupported file type! image must be jpg, png, gif, webp, or pdf"
 
             const uploadType = "NFTMetadata"
 
