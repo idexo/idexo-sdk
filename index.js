@@ -41,6 +41,32 @@ async function sendRequest(apiKey, network, data, method = "post", params = null
     })
 }
 
+function isBase64String(str) {
+    return str.length % 4 == 0 && /^[A-Za-z0-9+/]+[=]{0,2}$/.test(str)
+}
+
+function isStringURL(str) {
+    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+    return regexp.test(str)
+}
+
+function detectMimeType(b64) {
+    for (var s in base64Signatures) {
+        if (b64.indexOf(s) === 0) {
+            return base64Signatures[s]
+        }
+    }
+}
+
+const base64Signatures = {
+    JVBERi0: "application/pdf",
+    R0lGODdh: "image/gif",
+    R0lGODlh: "image/gif",
+    iVBORw0KGgo: "image/png",
+    "/9j/": "image/jpg",
+    U: "image/webp"
+}
+
 const IdexoSDK = {
     Common: {
         async transferOwnership(apiKey, network, contractAddress, newOwnerAddress) {
@@ -61,23 +87,17 @@ const IdexoSDK = {
     },
 
     Multi: {
-        async mintNFTWithImage(
-            apiKey,
-            network,
-            contractAddress,
-            mintToAddress,
-            image,
-            nftName,
-            nftDescription,
-            attributes,
-            imageIsBase64 = false,
-            contentType,
-            options
-        ) {
-            if (!imageIsBase64) {
+        // image (string) can be 1) path to file, 2) url, or 3) base64 string
+        async mintNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, options) {
+            let contentType
+
+            // if image is string path to file
+            if (!isStringURL(image) && !isBase64String(image)) {
                 contentType = mime.getType(image)
                 image = await fs.readFile(image, { encoding: "base64" })
             }
+            if (isBase64String(image)) contentType = detectMimeType(image)
+            if (contentType === undefined && !isStringURL(image)) throw "unsupported file type! image must be jpg, png, gif, webp, or pdf"
 
             const transactionType = "mintNFTWithImage"
 
@@ -181,13 +201,21 @@ const IdexoSDK = {
             })
         }
     },
+
     Staking: {
         async createStakePoolMultiple(apiKey, network, poolName, symbol, baseUri, depositToken, rewardToken, options) {
             const transactionType = "createStakePoolMultipleRewards"
 
-            return await sendRequest(apiKey, network, { transactionType, poolName, symbol, baseUri, depositToken, rewardToken, options })
-        },
-        
+            return await sendRequest(apiKey, network, {
+                transactionType,
+                poolName,
+                symbol,
+                baseUri,
+                depositToken,
+                rewardToken,
+                options
+            })
+        }
     },
 
     Storage: {
@@ -207,24 +235,30 @@ const IdexoSDK = {
             return await sendRequest(apiKey, network, { uploadType, data, encoding: "null" })
         },
         async uploadBuffer(apiKey, network, data, encoding) {
-            //data must be string (should enforce that with type)
+            // data must be string (should enforce that with type)
             const uploadType = "buffer"
 
             return await sendRequest(apiKey, network, { uploadType, data, encoding })
         },
         async uploadImage(apiKey, network, imagePath) {
-            //data must be string (should enforce that with type)
+            // data must be string (should enforce that with type)
             const uploadType = "image"
             const contentType = mime.getType(imagePath)
             const image = await fs.readFile(imagePath, { encoding: "base64" })
 
             return await sendRequest(apiKey, network, { uploadType, image, contentType })
         },
-        async uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, imageIsBase64 = false, contentType, options) {
-            if (!imageIsBase64) {
+        // image (string) can be 1) path to file, 2) url, or 3) base64 string
+        async uploadNFTMetadata(apiKey, network, image, nftName, nftDescription, attributes, options) {
+            let contentType
+
+            // if image is string path to file
+            if (!isStringURL(image) && !isBase64String(image)) {
                 contentType = mime.getType(image)
                 image = await fs.readFile(image, { encoding: "base64" })
             }
+            if (isBase64String(image)) contentType = detectMimeType(image)
+            if (contentType === undefined && !isStringURL(image)) throw "unsupported file type! image must be jpg, png, gif, webp, or pdf"
 
             const uploadType = "NFTMetadata"
 
