@@ -71,6 +71,8 @@ createSBTCapped(apiKey, network, name, symbol, baseUri, cap, options)
 
 createSBTUncapped(apiKey, network, name, symbol, baseUri, options)
 
+createLinkedSBTUncapped(apiKey, network, name, symbol, baseUri, options)
+
 mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri)
 
 
