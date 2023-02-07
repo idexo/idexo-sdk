@@ -184,6 +184,11 @@ const IdexoSDK = {
 
             return await sendRequest(apiKey, network, { transactionType, name, symbol, baseUri, options })
         },
+        async createLinkedSBTUncapped(apiKey, network, name, symbol, baseUri, options) {
+            const transactionType = "createUncappedLinkedSBT"
+
+            return await sendRequest(apiKey, network, { transactionType, name, symbol, baseUri, options })
+        },
         // TODO: add abi and methods
         // async createSBTCommunityUncapped(apiKey, network, name, symbol, options) {
         //     const transactionType = "createSBTCommunityUncapped"
