@@ -68,6 +68,18 @@ const base64Signatures = {
 }
 
 const IdexoSDK = {
+    Bridges: {
+        async createRelayer(apiKey, type, tokenAddress, adminFee, bridgeWallet, threshold, signers, options) {
+            if(type === "origin") {
+                const transactionType = "createOriginRelayer"
+            }
+            else if(type === "destination") {
+                const transactionType = "createDestinationRelayer"
+            }
+            return await sendRequest(apiKey, network, { tokenAddress, adminFee, bridgeWallet, threshold, signers, options, transactionType })
+        }
+    },
+
     Common: {
         async transferOwnership(apiKey, network, contractAddress, newOwnerAddress) {
             const transactionType = "transferOwnership"
