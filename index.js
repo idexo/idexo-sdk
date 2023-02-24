@@ -69,7 +69,7 @@ const base64Signatures = {
 
 const IdexoSDK = {
     Bridges: {
-        async createRelayer(apiKey, type, tokenAddress, adminFee, bridgeWallet, threshold, signers, options) {
+        async createRelayer(apiKey, network, type, tokenAddress, adminFee, bridgeWallet, threshold, signers, options) {
             if(type === "origin") {
                 const transactionType = "createOriginRelayer"
             }
