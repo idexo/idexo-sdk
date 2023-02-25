@@ -72,11 +72,13 @@ const IdexoSDK = {
         async createRelayer(apiKey, network, type, tokenAddress, adminFee, bridgeWallet, threshold, signers, options) {
             if(type === "origin") {
                 const transactionType = "createOriginRelayer"
+                return await sendRequest(apiKey, network, { tokenAddress, adminFee, bridgeWallet, threshold, signers, options, transactionType })
             }
             else if(type === "destination") {
                 const transactionType = "createDestinationRelayer"
+                return await sendRequest(apiKey, network, { tokenAddress, adminFee, bridgeWallet, threshold, signers, options, transactionType })
             }
-            return await sendRequest(apiKey, network, { tokenAddress, adminFee, bridgeWallet, threshold, signers, options, transactionType })
+            
         }
     },
 
