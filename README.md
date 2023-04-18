@@ -138,6 +138,8 @@ getTransactionsByFunction(apiKey, function_name)
 
 The following networks are currently supported:
 
+* Arbitrum
+* Arbitrum Nova
 * Arweave
 * Avalanche
 * BNBchain (fka Binance Smart Chain)
