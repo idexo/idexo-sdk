@@ -4,6 +4,7 @@ const mime = require("mime")
 
 const chainURLs = {
     arbitrum: "https://arbitrum.idexo.io",
+    arbitrumnova: "https://arbitrumnova.idexo.io",
     arweave: "https://ziparweave.idexo.io",
     avalanche: "https://avalanche.idexo.io",
     bnbchain: "https://mainnetbsc.idexo.io",
