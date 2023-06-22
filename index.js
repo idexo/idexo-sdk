@@ -99,9 +99,9 @@ const IdexoSDK = {
             const transactionType = "createAuctionMarketplace"
             return await sendRequest(apiKey, network, { purchaseToken, maxDuration, options, transactionType })
         },
-        async listNFTMeta(apiKey, network, contractAddress, sender, nftContractAddress, tokenId, price, nonce, signature, options) {
+        async listNFTMeta(apiKey, network, contractAddress, sender, nftContractAddress, tokenId, price, nonce, request, signature, options) {
             const transactionType = "listNFTMeta"
-            return await sendRequest(apiKey, network, { contractAddress, sender, nftContractAddress, tokenId, price, nonce, signature, options, transactionType })
+            return await sendRequest(apiKey, network, { contractAddress, sender, nftContractAddress, tokenId, price, nonce, request, signature, options, transactionType })
         }
     },
 
