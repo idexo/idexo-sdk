@@ -131,7 +131,7 @@ const IdexoSDK = {
                 transactionType,
                 options
             })
-        }
+        },
 
         async mintRoyaltyNFTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, options) {
             let contentType
