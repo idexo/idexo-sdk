@@ -136,7 +136,7 @@ getTransactionsByFunction(apiKey, function_name)
 
 ## Available Networks
 
-The following networks are currently supported:
+The following mainnet networks are currently supported:
 
 * Arbitrum
 * Arbitrum Nova
@@ -147,8 +147,14 @@ The following networks are currently supported:
 * Ethereum
 * Fantom
 * Filecoin
+* OKC
 * Polygon
 * Solana
+* zkSync
+
+The following testnet networks are currently supporded: 
+
+* Mumbai (polygon testnet)
 
 
 ### Documentation

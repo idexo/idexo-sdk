@@ -12,6 +12,7 @@ const chainURLs = {
     ethereum: "https://mainneteth.idexo.io",
     fantom: "https://fantom.idexo.io",
     filecoin: "https://filecoin.idexo.io",
+    mumbai: "https://mumbai.idexo.io",
     okc: "https://okc.idexo.io",
     polygon: "https://polygon.idexo.io",
     solana: "https://solana.idexo.io",
