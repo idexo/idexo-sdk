@@ -4,14 +4,14 @@ Idexo's multi-blockchain development SDK is the easiest way to create, deploy an
 
 The SDK offers simplified methods that accomplish exactly what you are looking to do (i.e. leverage specific features) of different blockchains in your application.
 
-For example, upload plain text permanently to the Arweave permaweb:
+For example, creating a Royalty NFT collection that is capped to 100 NFTs to be deployed on your preferred blockchain network:
 
 ```javascript
 const ido = require("idexo-sdk")
 
-const plainText = "Hello World"
-
-ido.Storage.uploadPlain('arweave', plainText).then(res => console.log(res.data))
+ido.NFTs.createCappedRoyalty(apiKey, networkName, NFTCollectionName, NFTCollectionSymbol, 
+RoyaltyCollectorWalletAddress, RoyaltyBasisPoints, 100) //100 is Cap value
+.then((res) => console.log(res.data))
 ```
 
 ## Installing
@@ -27,6 +27,12 @@ Using yarn:
 ```
 $ yarn add idexo-sdk
 ```
+
+To use these methods you need credits that you can obtain in the idexo dashboard at https://app.idexo.io/register. 
+
+For information on how to purchase and use transaction and method credits with this SDK, see https://docs.idexo.com/master. 
+
+Find your API key under Account -> API. 
 
 ## Available Methods
 
@@ -136,25 +142,26 @@ getTransactionsByFunction(apiKey, function_name)
 
 ## Available Networks
 
-The following mainnet networks are currently supported:
+The following mainnet networks are currently supported [values to set for network in brackets]:
 
-* Arbitrum
-* Arbitrum Nova
-* Arweave
-* Avalanche
-* BNBchain (fka Binance Smart Chain)
-* Dogechain
-* Ethereum
-* Fantom
-* Filecoin
-* OKC
-* Polygon
-* Solana
-* zkSync
+* Arbitrum [arbitrum]
+* Arbitrum Nova [arbitrumnova]
+* Arweave [arweave]
+* Avalanche [avalanche]
+* BNBchain (fka Binance Smart Chain) [bnbchain]
+* Dogechain [dogechain]
+* Ethereum [etherum]
+* Fantom [fantom]
+* Filecoin [filecoin]
+* OKC [okc]
+* Polygon [polygon]
+* Solana [solana]
+* zkSync [zksync]
 
 The following testnet networks are currently supporded: 
 
-* Mumbai (polygon testnet)
+* Mumbai (polygon testnet) [mumbai]
+* zkSync Testnet [zksynctest]
 
 
 ### Documentation
