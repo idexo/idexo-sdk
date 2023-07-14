@@ -16,7 +16,8 @@ const chainURLs = {
     okc: "https://okc.idexo.io",
     polygon: "https://polygon.idexo.io",
     solana: "https://solana.idexo.io",
-    utilsUrl: "https://transactions.idexo.io"
+    utilsUrl: "https://transactions.idexo.io",
+    zksynctest: "https://zksynctest.idexo.io"
 }
 
 function headers(apiKey) {
