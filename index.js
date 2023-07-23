@@ -17,6 +17,7 @@ const chainURLs = {
     polygon: "https://polygon.idexo.io",
     solana: "https://solana.idexo.io",
     utilsUrl: "https://transactions.idexo.io",
+    zksync: "https://zksync.idexo.io",
     zksynctest: "https://zksynctest.idexo.io"
 }
 
