@@ -107,6 +107,8 @@ uploadPlain(apiKey, network, data)
 
 uploadHTML(apiKey, network, data)
 
+uploadJSON(apiKey, network, data)
+
 uploadBuffer(apiKey, network, data, encoding)
 
 uploadImage(apiKey, network, imagePath)
