@@ -155,6 +155,7 @@ The following mainnet networks are currently supported [values to set for networ
 * Ethereum [etherum]
 * Fantom [fantom]
 * Filecoin [filecoin]
+* Mantle [mantle]
 * OKC [okc]
 * Polygon [polygon]
 * Solana [solana]
