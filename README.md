@@ -157,14 +157,14 @@ The following mainnet networks are currently supported [values to set for networ
 * Filecoin [filecoin]
 * Mantle [mantle]
 * OKC [okc]
+* Optimism [optimism]
 * Polygon [polygon]
-* Solana [solana]
 * zkSync [zksync]
 
 The following testnet networks are currently supporded: 
 
 * Mumbai (polygon testnet) [mumbai]
-* zkSync Testnet [zksynctest]
+* zkSync Sepolia Testnet [zksynctest]
 
 
 ### Documentation

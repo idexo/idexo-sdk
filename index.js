@@ -15,6 +15,7 @@ const chainURLs = {
     mumbai: "https://mumbai.idexo.io",
     mantle: "https://mantle.idexo.io",
     okc: "https://okc.idexo.io",
+    optimism: "https://optimism.idexo.io",
     polygon: "https://polygon.idexo.io",
     solana: "https://solana.idexo.io",
     utilsUrl: "https://transactions.idexo.io",
