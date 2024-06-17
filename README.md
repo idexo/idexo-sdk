@@ -149,21 +149,16 @@ The following mainnet networks are currently supported [values to set for networ
 * Arbitrum [arbitrum]
 * Arbitrum Nova [arbitrumnova]
 * Arweave [arweave]
-* Avalanche [avalanche]
-* BNBchain (fka Binance Smart Chain) [bnbchain]
-* Dogechain [dogechain]
 * Ethereum [etherum]
 * Fantom [fantom]
 * Filecoin [filecoin]
 * Mantle [mantle]
-* OKC [okc]
 * Optimism [optimism]
 * Polygon [polygon]
 * zkSync [zksync]
 
 The following testnet networks are currently supporded: 
 
-* Mumbai (polygon testnet) [mumbai]
 * zkSync Sepolia Testnet [zksynctest]
 
 
