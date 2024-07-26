@@ -149,6 +149,7 @@ The following mainnet networks are currently supported [values to set for networ
 * Arbitrum [arbitrum]
 * Arbitrum Nova [arbitrumnova]
 * Arweave [arweave]
+* Base [base]
 * Ethereum [etherum]
 * Fantom [fantom]
 * Filecoin [filecoin]
