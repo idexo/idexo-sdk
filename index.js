@@ -250,6 +250,12 @@ const IdexoSDK = {
             })
         },
 
+        async mintSBTBatch(apiKey, network, contractAddress, recipients, tokenUris) {
+            const transactionType = "mintSBTBatch"
+
+            return await sendRequest(apiKey, network, { transactionType, contractAddress, recipients, tokenUris })
+        },
+
          // image (string) can be 1) path to file, 2) url, or 3) base64 string
          async mintSBTWithImage(apiKey, network, contractAddress, mintToAddress, image, nftName, nftDescription, attributes, options) {
             let contentType

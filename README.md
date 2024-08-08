@@ -81,6 +81,8 @@ createLinkedSBTUncapped(apiKey, network, name, symbol, baseUri, options)
 
 mintSBT(apiKey, network, contractAddress, mintToAddress, tokenUri)
 
+mintSBTBatch(apiKey, network, contractAddress, [recipients], [tokenURIs])
+
 
 ### Multi
 
