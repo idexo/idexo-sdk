@@ -153,16 +153,9 @@ The following mainnet networks are currently supported [values to set for networ
 * Arweave [arweave]
 * Base [base]
 * Ethereum [etherum]
-* Fantom [fantom]
 * Filecoin [filecoin]
-* Mantle [mantle]
 * Optimism [optimism]
-* Polygon [polygon]
-* zkSync [zksync]
-
-The following testnet networks are currently supporded: 
-
-* zkSync Sepolia Testnet [zksynctest]
+* ZKcandy [zkcandy]
 
 
 ### Documentation
@@ -173,6 +166,3 @@ The following testnet networks are currently supporded:
 
 [idexo.com](https://idexo.com)
 
-### Token
-
-[the $IDO token](https://token.idexo.io)
