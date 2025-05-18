@@ -13,8 +13,7 @@ const chainURLs = {
     optimism: "https://optimism.idexo.io",
     polygon: "https://polygon.idexo.io",
     utilsUrl: "https://transactions.idexo.io",
-    zksync: "https://zksync.idexo.io",
-    zksynctest: "https://zksynctest.idexo.io"
+    zkcandy: "https://zkcandy.api.idexo.com"
 }
 
 function headers(apiKey) {
