@@ -9,9 +9,7 @@ const chainURLs = {
     base: "https://base.idexo.io",
     ethereum: "https://mainneteth.idexo.io",
     filecoin: "https://filecoin.idexo.io",
-    mantle: "https://mantle.idexo.io",
     optimism: "https://optimism.idexo.io",
-    polygon: "https://polygon.idexo.io",
     utilsUrl: "https://transactions.idexo.io",
     zkcandy: "https://zkcandy.api.idexo.com"
 }
